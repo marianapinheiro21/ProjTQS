@@ -7,13 +7,18 @@ import lombok.NoArgsConstructor;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorResponseValidator {
 
-    public static void assertErrorResponse(ErrorResponse errorResponse, String message, String path) {
+    public static void assertErrorResponse(ErrorResponse errorResponse, Integer statusCode, String error, String message, String path) {
         //TODO: update this with the parameters you want to validate on error responses
-        assertThat(String.format("Message should be %s", message), errorResponse.getMessage(), is(message));
-        assertThat(String.format("path should be %s", message), errorResponse.getPath(), is(path));
+        assertThat("Timestamp should not be null", errorResponse.getTimestamp(), notNullValue());
+        assertThat("status is not the expected", errorResponse.getStatus(), is(statusCode));
+        assertThat("Error is not the expected", errorResponse.getError(), is(error));
+        assertThat("Message is not the expected", errorResponse.getMessage(), is(message));
+        assertThat("Path is not the expected", errorResponse.getPath(), is(path));
+
     }
 }
