@@ -9,7 +9,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class RetrofitBuilder {
     
-    private static final String API_URL = System.getProperty("base_url", "<insert api url>");
+    private static final String API_URL = System.getProperty("base_url", "http://localhost:8080/");
     private static final Integer TIMEOUT = Integer.parseInt(System.getProperty("timeout", "30"));
     private Retrofit retrofit;
     
@@ -17,11 +17,11 @@ public class RetrofitBuilder {
     public RetrofitBuilder() {
         retrofit = buildRetrofit(buildClient());
     }
-    
+
     public Retrofit getRetrofit() {
         return retrofit;
     }
-    
+
     /**
      * @return HttpClient and logging set
      */
