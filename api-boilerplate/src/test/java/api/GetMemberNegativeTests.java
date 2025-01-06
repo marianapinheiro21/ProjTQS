@@ -1,4 +1,4 @@
-package api.generic;
+package api;
 
 import api.mappings.generic.ErrorResponse;
 import api.mappings.generic.Member;

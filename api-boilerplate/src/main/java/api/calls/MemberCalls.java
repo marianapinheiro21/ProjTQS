@@ -20,5 +20,12 @@ public interface MemberCalls {
     @GET(MEMBER_ID)
     Call<Member> getMemberByID(@Path("id") Integer id);
 
-    //@POST
+    @POST(MEMBER)
+    Call<ResponseBody> createMember(@Body Member member);
+
+    @DELETE(MEMBER_ID)
+    Call<ResponseBody> deleteMember(@Path("id") Integer id);
+
+    @PUT(MEMBER_ID)
+    Call<Member> updateMember(@Path("id") Integer id, @Body Member member);
 }
