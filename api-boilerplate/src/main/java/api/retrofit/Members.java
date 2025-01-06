@@ -19,7 +19,22 @@ public class Members {
     }
 
     @SneakyThrows
-    public static Response<Member> getMemberByID(Integer MemberId) {
-        return memberCalls.getMemberByID(MemberId).execute();
+    public static Response<Member> getMemberByID(Integer memberId) {
+        return memberCalls.getMemberByID(memberId).execute();
+    }
+
+    @SneakyThrows
+    public static Response<ResponseBody> createMember(Member member) {
+        return memberCalls.createMember(member).execute();
+    }
+
+    @SneakyThrows
+    public static Response<ResponseBody> deleteMember(Integer memberId) {
+        return memberCalls.deleteMember(memberId).execute();
+    }
+
+    @SneakyThrows
+    public static Response<Member> updateMember(Integer memberId, Member member) {
+        return memberCalls.updateMember(memberId, member).execute();
     }
 }

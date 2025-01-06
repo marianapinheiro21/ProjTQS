@@ -1,4 +1,4 @@
-package api.generic;
+package api.mappings.Member;
 
 import api.mappings.generic.Member;
 import lombok.SneakyThrows;
