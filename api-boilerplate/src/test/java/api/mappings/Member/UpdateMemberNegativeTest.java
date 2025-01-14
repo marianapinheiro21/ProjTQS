@@ -8,24 +8,25 @@ import okhttp3.ResponseBody;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
-
 import static api.retrofit.Members.deleteMember;
-import static api.retrofit.Members.getMemberByID;
+import static api.retrofit.Members.updateMember;
 import static api.validators.ErrorResponseValidator.assertErrorResponse;
-import static api.validators.ResponseValidator.assertNoContent;
 import static api.validators.ResponseValidator.assertNotFound;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class DeleteMemberNegativeTest {
+public class UpdateMemberNegativeTest {
 
     @SneakyThrows
-    @Test(description = "Delete Member with no Success")       //Na documentação está explicito que deveria retornar o erro 404, no entanto está a devolver que apagou com sucesso um membro que não existe
-    public void deleteMemberSuccess(){
-        Integer id=45;  //Estou a testar com o id 45 porque sei de antemão que há apenas 2 membros
-        Response<ResponseBody> response = deleteMember(id);
+    @Test(description = "Update Member with no Success")       //Na documentação está explicito que deveria retornar o erro 404, no entanto está a devolver que apagou com sucesso um membro que não existe
+    public void deleteMemberSuccess() {
+        Member memberUpdate = Member.builder()
+                .address("Ilha das Flores")
+                .build();
+
+        Integer id = 45;  //Estou a testar com o id 45 porque sei de antemão que há apenas 2 membros
+        Response<Member> response = updateMember(id, memberUpdate);
         assertNotFound(response);
 
         ErrorResponse errorResponse = Errors.getErrorsResponse(response);
@@ -36,6 +37,5 @@ public class DeleteMemberNegativeTest {
         assertThat("Path is not the expected", errorResponse.getPath(), is(String.format("/member/%d", id)));
 
         assertErrorResponse(errorResponse, 404, "Not Found", "Member not found", String.format("/member/%d", id));
-
     }
 }
