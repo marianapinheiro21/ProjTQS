@@ -1,13 +1,11 @@
 package api.mappings.Member;
 
 import api.mappings.generic.Member;
-import lombok.SneakyThrows;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 import java.util.List;
 
 import static api.retrofit.Members.*;
-import static org.testng.Assert.*;
 import static api.validators.ResponseValidator.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
