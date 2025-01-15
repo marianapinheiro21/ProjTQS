@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import static api.retrofit.Members.*;
 import static api.retrofit.generic.Generic.createGenericCall;
 import static api.validators.ResponseValidator.assertCreated;
+import static api.validators.ResponseValidator.assertMember;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -64,6 +65,7 @@ public class CreateMemberPositiveTest {
         assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
         assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
 
+        assertMember(response, memberResponse, memberRequest);
     }
 
 
@@ -104,6 +106,7 @@ public class CreateMemberPositiveTest {
         assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
         assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
 
+        assertMember(response, memberResponse, memberRequest);
     }
 
 }

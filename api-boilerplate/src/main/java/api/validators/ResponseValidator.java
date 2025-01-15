@@ -1,5 +1,6 @@
 package api.validators;
 
+import api.mappings.generic.Member;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import retrofit2.Response;
@@ -20,14 +21,31 @@ import static java.net.HttpURLConnection.HTTP_PRECON_FAILED;
 import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ResponseValidator {
     /**
      * Can use this class to check all the most common errors
      */
+    public static void assertMember(Response response, Member memberResponse, Member memberRequest) {
+        assertThat("Body is not null", memberResponse, notNullValue());
+        assertThat("id should not be null", memberResponse.getId(), notNullValue());
+        assertThat("First name is not the expected", memberResponse.getFirstName(), is(memberRequest.getFirstName()));
+        assertThat("Last name is not the expected", memberResponse.getLastName(), is(memberRequest.getLastName()));
+        assertThat("Address is not the expected", memberResponse.getAddress(), is(memberRequest.getAddress()));
+        assertThat("Postal Code is not the expected", memberResponse.getPostalCode(), is(memberRequest.getPostalCode()));
+        assertThat("City is not the expected", memberResponse.getCity(), is(memberRequest.getCity()));
+        assertThat("Country is not the expected", memberResponse.getCountry(), is(memberRequest.getCountry()));
+        assertThat("Phone Number is not the expected", memberResponse.getPhoneNumber(), is(memberRequest.getPhoneNumber()));
+        assertThat("Nif is not the expected", memberResponse.getNif(), is(memberRequest.getNif()));
+        assertThat("Email is not the expected", memberResponse.getEmail(), is(memberRequest.getEmail()));
+        assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
+        assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
+    }
 
-    public static void assertOk(Response response) {
+
+        public static void assertOk(Response response) {
         assertThat(String.format("Expected response code to be [%s] but was [%s]", HTTP_OK, response.code()), response.code(), is(HTTP_OK));
     }
 
