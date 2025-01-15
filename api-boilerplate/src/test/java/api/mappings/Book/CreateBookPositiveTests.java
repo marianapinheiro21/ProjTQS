@@ -9,7 +9,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-import static api.helpers.BookTestHelper.*;
+
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.assertCreated;
 import static org.hamcrest.MatcherAssert.assertThat;

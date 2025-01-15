@@ -9,7 +9,8 @@ import org.testng.annotations.Test;
 import retrofit2.Response;
 import okhttp3.ResponseBody;
 
-import static api.helpers.BookTestHelper.*;
+import java.io.IOException;
+
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.*;
 import static api.validators.ErrorResponseValidator.assertErrorResponse;

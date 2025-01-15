@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"api.calls"},{"l":"api.mappings.generic"},{"l":"api.retrofit"},{"l":"api.retrofit.generic"},{"l":"api.validators"}];updateSearchResults();

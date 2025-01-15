@@ -5,6 +5,7 @@ import api.mappings.generic.ErrorResponse;
 import api.retrofit.generic.Errors;
 import org.testng.annotations.Test;
 import retrofit2.Response;
+import java.io.IOException;
 
 import static api.retrofit.Books.getBookById;
 import static api.validators.ErrorResponseValidator.assertErrorResponse;

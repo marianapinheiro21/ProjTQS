@@ -7,7 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import static api.helpers.BookTestHelper.*;
+import java.io.IOException;
+
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,12 +17,19 @@ import static org.hamcrest.Matchers.is;
 public class UpdateBookPositiveTests {
 
     private Integer bookId;
-    private Book originalBook;
+
 
     @BeforeMethod
     public void setup() throws IOException {
-        originalBook = createDefaultTestBook();
-        bookId = createBookAndGetId(originalBook);
+        Book bookRequest = Book.builder()
+                .title("Oliver na penacova")
+                .author("Olivier")
+                .isbn(String.valueOf(System.currentTimeMillis()))
+                .status(BookStatus.AVAILABLE.toString())
+                .build();
+
+        Response<ResponseBody> response = createBook(bookRequest);
+        bookId = Integer.parseInt(response.body().string());
     }
 
     @AfterMethod

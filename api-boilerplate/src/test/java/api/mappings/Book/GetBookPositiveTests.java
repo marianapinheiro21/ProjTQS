@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import retrofit2.Response;
 import java.util.List;
 
+import java.io.IOException;
+
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -10,7 +10,6 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-import static api.helpers.BookTestHelper.*;
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.assertBadRequest;
 import static api.validators.ErrorResponseValidator.assertErrorResponse;
