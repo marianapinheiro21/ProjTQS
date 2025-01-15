@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class GetReservationPositiveTest {
 
-    /*Integer memberId, bookId, reservationId;
+    Integer memberId, bookId, reservationId;
     Reservation reservationRequest;
     @SneakyThrows
     @BeforeMethod
@@ -79,7 +79,7 @@ public class GetReservationPositiveTest {
         Response<ResponseBody> reservationRequest =  createReservation(memberId, bookId);
         assert reservationRequest.body() != null;
 
-        reservationId = Integer.parseInt(reservationRequest.body().toString());
+        reservationId = Integer.parseInt(reservationRequest.body().string());
     }
 
 
@@ -117,7 +117,7 @@ public class GetReservationPositiveTest {
         assertThat("Reservation's Date is not the expected", reservationResponse.getReservationDate(), is(reservationRequest2.getReservationDate()));
         assertThat("Reservation's Return Date is not the expected", reservationResponse.getReturnDate(), is(reservationRequest2.getReturnDate()));
 
-    }*/
+    }
 
     @Test(description ="Get reservation by ID")
     public void getReservationById2( ) {
