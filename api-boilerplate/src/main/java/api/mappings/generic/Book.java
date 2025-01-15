@@ -44,4 +44,6 @@ public class Book {
 
     @JsonProperty("status")
     private String status;
-} 
+
+}
+

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import static api.retrofit.Members.*;
+import static api.validators.ResponseValidator.assertMember;
 import static api.validators.ResponseValidator.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -58,20 +59,7 @@ public class UpdateMemberPositiveTest {
         Member memberRequest = memberUpdate;
 
         assertOk(response);
-        assertThat("Body is not null", memberResponse, notNullValue());
-        assertThat("id should not be null", memberResponse.getId(), notNullValue());
-        assertThat("First name is not the expected", memberResponse.getFirstName(), is(memberRequest.getFirstName()));
-        assertThat("Last name is not the expected", memberResponse.getLastName(), is(memberRequest.getLastName()));
-        assertThat("Address is not the expected", memberResponse.getAddress(), is(memberRequest.getAddress()));
-        assertThat("Postal Code is not the expected", memberResponse.getPostalCode(), is(memberRequest.getPostalCode()));
-        assertThat("City is not the expected", memberResponse.getCity(), is(memberRequest.getCity()));
-        assertThat("Country is not the expected", memberResponse.getCountry(), is(memberRequest.getCountry()));
-        assertThat("Phone Number is not the expected", memberResponse.getPhoneNumber(), is(memberRequest.getPhoneNumber()));
-        assertThat("Nif is not the expected", memberResponse.getNif(), is(memberRequest.getNif()));
-        assertThat("Email is not the expected", memberResponse.getEmail(), is(memberRequest.getEmail()));
-        assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
-        assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
-
+        assertMember(response, memberResponse, memberRequest);
 
     }
 
@@ -96,21 +84,7 @@ public class UpdateMemberPositiveTest {
         Member memberRequest = memberUpdate;
 
         assertOk(response);
-        assertThat("Body is not null", memberResponse, notNullValue());
-        assertThat("id should not be null", memberResponse.getId(), notNullValue());
-        assertThat("First name is not the expected", memberResponse.getFirstName(), is(memberRequest.getFirstName()));
-        assertThat("Last name is not the expected", memberResponse.getLastName(), is(memberRequest.getLastName()));
-        assertThat("Address is not the expected", memberResponse.getAddress(), is(memberRequest.getAddress()));
-        assertThat("Postal Code is not the expected", memberResponse.getPostalCode(), is(memberRequest.getPostalCode()));
-        assertThat("City is not the expected", memberResponse.getCity(), is(memberRequest.getCity()));
-        assertThat("Country is not the expected", memberResponse.getCountry(), is(memberRequest.getCountry()));
-        assertThat("Phone Number is not the expected", memberResponse.getPhoneNumber(), is(memberRequest.getPhoneNumber()));
-        assertThat("Nif is not the expected", memberResponse.getNif(), is(memberRequest.getNif()));
-        assertThat("Email is not the expected", memberResponse.getEmail(), is(memberRequest.getEmail()));
-        assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
-        assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
-
-
+        assertMember(response, memberResponse, memberRequest);
     }
 
 }

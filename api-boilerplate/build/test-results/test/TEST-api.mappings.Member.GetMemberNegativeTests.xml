@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.mappings.Member.GetMemberNegativeTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-15T13:11:22" hostname="mariana-VirtualBox" time="0.081">
+  <properties/>
+  <testcase name="getMemberNegativeTest" classname="api.mappings.Member.GetMemberNegativeTests" time="0.081"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: --> GET http://localhost:8080/member/99
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: --> END GET
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: <-- 404 http://localhost:8080/member/99 (50ms)
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:22 GMT
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:22.800+00:00","status":404,"error":"Not Found","message":"Member not found","path":"/member/99"}
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (127-byte body)
+]]></system-err>
+</testsuite>
