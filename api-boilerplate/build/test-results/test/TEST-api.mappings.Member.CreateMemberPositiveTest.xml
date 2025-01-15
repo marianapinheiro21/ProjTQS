@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.mappings.Member.CreateMemberPositiveTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-01-15T13:11:21" hostname="mariana-VirtualBox" time="0.825">
+  <properties/>
+  <testcase name="createMemberSuccess" classname="api.mappings.Member.CreateMemberPositiveTest" time="0.389"/>
+  <testcase name="createMemberSuccess2" classname="api.mappings.Member.CreateMemberPositiveTest" time="0.169"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 257
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":"Joaquim","lastName":"Daniel","address":"Rua das Flores","postalCode":"3898-098","city":"Amarante","country":null,"phoneNumber":963852741,"nif":123456789,"email":"john@doe.com","birthDate":"1999-09-09","registrationDate":"2025-01-15"}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (257-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 201 http://localhost:8080/member (38ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 115
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (3-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> GET http://localhost:8080/member/115
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END GET
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 200 http://localhost:8080/member/115 (153ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"id":115,"firstName":"Joaquim","lastName":"Daniel","address":"Rua das Flores","postalCode":"3898-098","city":"Amarante","country":null,"phoneNumber":963852741,"nif":123456789,"email":"john@doe.com","birthDate":"1999-09-09","registrationDate":"2025-01-15"}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (256-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> DELETE http://localhost:8080/member/115
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END DELETE
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 204 http://localhost:8080/member/115 (199ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 212
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (212-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 201 http://localhost:8080/member (30ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 116
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (3-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> GET http://localhost:8080/member/116
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END GET
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 200 http://localhost:8080/member/116 (19ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"id":116,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (211-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> DELETE http://localhost:8080/member/116
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END DELETE
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 204 http://localhost:8080/member/116 (42ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Keep-Alive: timeout=60
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: keep-alive
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP
+]]></system-err>
+</testsuite>

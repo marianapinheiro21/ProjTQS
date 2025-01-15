@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.mappings.Member.CreateMemberNegativeTest" tests="14" skipped="0" failures="8" errors="0" timestamp="2025-01-15T13:11:16" hostname="mariana-VirtualBox" time="5.017">
+  <properties/>
+  <testcase name="createMemberNegativeTest1" classname="api.mappings.Member.CreateMemberNegativeTest" time="3.311"/>
+  <testcase name="createMemberNegativeTest10" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.157"/>
+  <testcase name="createMemberNegativeTest11" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.145">
+    <failure message="java.lang.AssertionError: Message is not the expected&#10;Expected: is &quot;Invalid Postal Code&quot;&#10;     but: was &quot;Invalid Phone Number&quot;" type="java.lang.AssertionError">java.lang.AssertionError: Message is not the expected
+Expected: is &quot;Invalid Postal Code&quot;
+     but: was &quot;Invalid Phone Number&quot;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ErrorResponseValidator.assertErrorResponse(ErrorResponseValidator.java:20)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest11(CreateMemberNegativeTest.java:253)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest12" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.106">
+    <failure message="java.lang.AssertionError: Message is not the expected&#10;Expected: is &quot;Invalid Postal Code&quot;&#10;     but: was &quot;Invalid Phone Number&quot;" type="java.lang.AssertionError">java.lang.AssertionError: Message is not the expected
+Expected: is &quot;Invalid Postal Code&quot;
+     but: was &quot;Invalid Phone Number&quot;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ErrorResponseValidator.assertErrorResponse(ErrorResponseValidator.java:20)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest12(CreateMemberNegativeTest.java:274)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest13" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.068"/>
+  <testcase name="createMemberNegativeTest14" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.135">
+    <failure message="java.lang.AssertionError: Message is not the expected&#10;Expected: is &quot;Invalid Postal Code&quot;&#10;     but: was &quot;Invalid Phone Number&quot;" type="java.lang.AssertionError">java.lang.AssertionError: Message is not the expected
+Expected: is &quot;Invalid Postal Code&quot;
+     but: was &quot;Invalid Phone Number&quot;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ErrorResponseValidator.assertErrorResponse(ErrorResponseValidator.java:20)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest14(CreateMemberNegativeTest.java:316)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest2" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.157"/>
+  <testcase name="createMemberNegativeTest3" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.196">
+    <failure message="java.lang.AssertionError: Expected response code to be [400] but was [500]&#10;Expected: is &lt;400&gt;&#10;     but: was &lt;500&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Expected response code to be [400] but was [500]
+Expected: is &lt;400&gt;
+     but: was &lt;500&gt;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ResponseValidator.assertBadRequest(ResponseValidator.java:69)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest3(CreateMemberNegativeTest.java:82)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest4" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.105"/>
+  <testcase name="createMemberNegativeTest5" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.107">
+    <failure message="java.lang.AssertionError: Expected response code to be [400] but was [500]&#10;Expected: is &lt;400&gt;&#10;     but: was &lt;500&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Expected response code to be [400] but was [500]
+Expected: is &lt;400&gt;
+     but: was &lt;500&gt;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ResponseValidator.assertBadRequest(ResponseValidator.java:69)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest5(CreateMemberNegativeTest.java:124)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest6" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.074">
+    <failure message="java.lang.AssertionError: Message is not the expected&#10;Expected: is &quot;Invalid Postal Code&quot;&#10;     but: was &quot;Invalid Phone Number&quot;" type="java.lang.AssertionError">java.lang.AssertionError: Message is not the expected
+Expected: is &quot;Invalid Postal Code&quot;
+     but: was &quot;Invalid Phone Number&quot;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ErrorResponseValidator.assertErrorResponse(ErrorResponseValidator.java:20)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest6(CreateMemberNegativeTest.java:148)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest7" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.104">
+    <failure message="java.lang.AssertionError: Expected response code to be [400] but was [500]&#10;Expected: is &lt;400&gt;&#10;     but: was &lt;500&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Expected response code to be [400] but was [500]
+Expected: is &lt;400&gt;
+     but: was &lt;500&gt;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ResponseValidator.assertBadRequest(ResponseValidator.java:69)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest7(CreateMemberNegativeTest.java:166)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest8" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.077">
+    <failure message="java.lang.AssertionError: Expected response code to be [400] but was [500]&#10;Expected: is &lt;400&gt;&#10;     but: was &lt;500&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Expected response code to be [400] but was [500]
+Expected: is &lt;400&gt;
+     but: was &lt;500&gt;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at api.validators.ResponseValidator.assertBadRequest(ResponseValidator.java:69)
+	at api.mappings.Member.CreateMemberNegativeTest.createMemberNegativeTest8(CreateMemberNegativeTest.java:187)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="createMemberNegativeTest9" classname="api.mappings.Member.CreateMemberNegativeTest" time="0.088"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 212
+Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":"2028-01-15","registrationDate":null}
+Jan 15, 2025 1:11:18 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (212-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (304ms)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:19 GMT
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:19.040+00:00","status":400,"error":"Bad Request","message":"Invalid Birth Date","path":"/member"}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (128-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 199
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":null,"nif":123456789,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (199-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (38ms)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:19 GMT
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:19.493+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 196
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":null,"nif":null,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (196-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (35ms)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:19 GMT
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:19.640+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 193
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":null,"nif":123456789,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (193-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (19ms)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:19 GMT
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:19.807+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 194
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":null,"nif":null,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (194-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (27ms)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:19 GMT
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:19.906+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 188
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":null,"nif":null,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:19 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (188-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (27ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.004+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 207
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":null,"nif":123456789,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (207-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (89ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.190+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 206
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (206-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 500 http://localhost:8080/member (111ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.424+00:00","status":500,"error":"Internal Server Error","message":"Cannot invoke \"String.matches(String)\" because \"plate\" is null","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (186-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 207
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":963852741,"nif":null,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (207-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (29ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.552+00:00","status":400,"error":"Bad Request","message":"Invalid NIF","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (121-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 204
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (204-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 500 http://localhost:8080/member (63ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.661+00:00","status":500,"error":"Internal Server Error","message":"Cannot invoke \"java.time.LocalDate.isBefore(java.time.chrono.ChronoLocalDate)\" because \"date\" is null","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (225-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 201
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":null,"nif":123456789,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (201-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (36ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.782+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 201
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":963852741,"nif":null,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (201-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 500 http://localhost:8080/member (43ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.858+00:00","status":500,"error":"Internal Server Error","message":"Cannot invoke \"String.matches(String)\" because \"plate\" is null","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (186-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 198
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":null,"city":null,"country":null,"phoneNumber":963852741,"nif":123456789,"email":null,"birthDate":null,"registrationDate":null}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (198-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- 500 http://localhost:8080/member (21ms)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:20 GMT
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:20.953+00:00","status":500,"error":"Internal Server Error","message":"Cannot invoke \"String.matches(String)\" because \"plate\" is null","path":"/member"}
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (186-byte body)
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: --> POST http://localhost:8080/member
+Jan 15, 2025 1:11:20 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 202
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"id":null,"firstName":null,"lastName":null,"address":null,"postalCode":"3898-098","city":null,"country":null,"phoneNumber":null,"nif":null,"email":null,"birthDate":"1999-09-09","registrationDate":null}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: --> END POST (202-byte body)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- 400 http://localhost:8080/member (42ms)
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:21 GMT
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: {"timestamp":"2025-01-15T13:11:21.049+00:00","status":400,"error":"Bad Request","message":"Invalid Phone Number","path":"/member"}
+Jan 15, 2025 1:11:21 PM okhttp3.internal.platform.Platform log
+INFO: <-- END HTTP (130-byte body)
+]]></system-err>
+</testsuite>
