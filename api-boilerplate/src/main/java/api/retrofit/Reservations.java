@@ -33,13 +33,32 @@ public class Reservations {
     }
 
     @SneakyThrows
-    public static Response<Reservation> getAllReservationByMemberId(Integer id){
+    public static Response<List<Reservation>> getAllReservationByMemberId(Integer id){
         return reservationCalls.getAllReservationByMemberId(id).execute();
     }
 
     @SneakyThrows
-    public static Response<Reservation> getAllReservationByBookId(Integer id){
+    public static Response<List<Reservation>> getAllReservationByMemberIdActive(Integer id){
+        return reservationCalls.getAllReservationByMemberIdActive(id).execute();
+    }
+
+    @SneakyThrows
+    public static Response<List<Reservation>> getAllReservationByMemberIdNotActive(Integer id){
+        return reservationCalls.getAllReservationByMemberIdNotActive(id).execute();
+    }
+
+    @SneakyThrows
+    public static Response<List<Reservation>> getAllReservationByBookId(Integer id){
         return reservationCalls.getAllReservationByBookId(id).execute();
     }
 
+    @SneakyThrows
+    public static Response<List<Reservation>> getAllReservationByBookIdActive(Integer id){
+        return reservationCalls.getAllReservationByBookIdActive(id).execute();
+    }
+
+    @SneakyThrows
+    public static Response<List<Reservation>> getAllReservationByBookIdNotActive(Integer id){
+        return reservationCalls.getAllReservationByBookIdNotActive(id).execute();
+    }
 }
