@@ -1,26 +1,32 @@
-package api;
+package api.mappings.Member;
 
 import api.mappings.generic.ErrorResponse;
 import api.mappings.generic.Member;
 import api.retrofit.generic.Errors;
+import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
-
-import static api.retrofit.Members.*;
+import static api.retrofit.Members.deleteMember;
+import static api.retrofit.Members.updateMember;
 import static api.validators.ErrorResponseValidator.assertErrorResponse;
-import static api.validators.ResponseValidator.*;
+import static api.validators.ResponseValidator.assertNotFound;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class GetMemberNegativeTests {
+public class UpdateMemberNegativeTest {
 
-    @Test(description = "Failing to get a member")
-    public void getMemberNegativeTest() throws IOException {
-        Integer id = 99;
-        Response<Member> response = getMemberByID(id);
+    @SneakyThrows
+    @Test(description = "Update Member with no Success")       //Na documentação está explicito que deveria retornar o erro 404
+    public void deleteMemberSuccess() {
+        Member memberUpdate = Member.builder()
+                .address("Ilha das Flores")
+                .build();
+
+        Integer id = 45;  //Estou a testar com o id 45 porque sei de antemão que há apenas 2 membros
+        Response<Member> response = updateMember(id, memberUpdate);
         assertNotFound(response);
 
         ErrorResponse errorResponse = Errors.getErrorsResponse(response);
