@@ -1,8 +1,8 @@
 package api.mappings.Reservation;
 
-import api.mappings.generic.Member;
 import api.mappings.generic.Book;
-import api.mappings.generic.Reservation;
+import api.mappings.generic.ErrorResponse;
+import api.mappings.generic.Member;
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import org.testng.annotations.AfterMethod;
@@ -10,18 +10,22 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import static api.retrofit.Books.*;
-import static api.retrofit.Members.*;
-import static api.retrofit.Reservations.*;
-import static jdk.dynalink.linker.support.Guards.isNull;
+import static api.retrofit.Members.createMember;
+import static api.retrofit.Members.deleteMember;
+import static api.retrofit.Reservations.createReservation;
+import static api.retrofit.Reservations.returnBook;
+import static api.retrofit.generic.Errors.getErrorsResponse;
+import static api.validators.ErrorResponseValidator.assertErrorResponse;
+import static api.validators.ResponseValidator.assertBadRequest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class CreateReservationPositiveTest {
+public class CreateReservationNegativeTest {
+
     Integer memberId, bookId, reservationId;
 
     @SneakyThrows
@@ -79,29 +83,28 @@ public class CreateReservationPositiveTest {
         deleteBook(bookId);
     }
 
-    @AfterMethod
-    public void cleanUpReservation() {
-        returnBook(reservationId); //Não dando para apagar a reserva feita em testes, o mínimo que posso fazer é que ela fique completa
-    }
-
-
 
     @SneakyThrows
-    @Test(description = "Create new reservation with success")
-    public void createReservationSuccess(){ //works, not properly tested yet
+    @Test(description = "Create new reservation with no success")
+    public void createReservationNegativeTest1() { //Devolve o erro errado
 
-        Response<ResponseBody> reservationRequest = createReservation(memberId, bookId);
-        assertThat(reservationRequest.code(), is(201));
+        Response<ResponseBody> reservationRequest = createReservation(memberId, -1);
+        assertBadRequest(reservationRequest);
 
-        assertThat("Body is not null", reservationRequest.body(), notNullValue());
-        reservationId = Integer.parseInt(reservationRequest.body().string());
-
-        Reservation reservationResponse = getReservationByID(reservationId).body();
-        assertThat("id should not be null", reservationResponse.getId(), notNullValue());
-        assertThat("Member's Id is not the expected", reservationResponse.getMemberId(), is(memberId));
-        assertThat("Book's Id is not the expected", reservationResponse.getBookId(), is(bookId));
+        ErrorResponse errorResponse = getErrorsResponse(reservationRequest);
+        assertErrorResponse(errorResponse, 400, "Bad Request", "Invalid Book ID", "/reservation/member/{memberId}/book-1");
 
     }
 
+    @SneakyThrows
+    @Test(description = "Create new reservation with no success")
+    public void createReservationNegativeTest2() { //Devolve o erro errado
+
+        Response<ResponseBody> reservationRequest = createReservation(-1, bookId);
+        assertBadRequest(reservationRequest);
+
+        ErrorResponse errorResponse = getErrorsResponse(reservationRequest);
+        assertErrorResponse(errorResponse, 400, "Bad Request", "Invalid Member ID", "/reservation/member/-1/book{bookId}");
+    }
 
 }
