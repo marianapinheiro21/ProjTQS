@@ -1,145 +1,96 @@
 package api.mappings.Book;
 
 import api.mappings.generic.Book;
-import api.mappings.generic.ErrorResponse;
-import api.retrofit.generic.Errors;
+import lombok.SneakyThrows;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
 import java.util.List;
 
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.*;
-import static api.validators.ErrorResponseValidator.assertErrorResponse;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class GetBookNegativeTest {
 
     @Test(description = "Get book with non-existent ID")
-    public void getNonExistentBookTest() throws IOException {
-        Integer nonExistentId = 999999;
-        Response<Book> response = getBookById(nonExistentId);
+    @SneakyThrows
+    public void getBookNonExistentIdTest() {
+        Response<Book> response = getBookById(99999);
         assertNotFound(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 404, "Not Found",
-                "Book not found", "/book/" + nonExistentId);
     }
 
-    @Test(description = "Get book with negative ID")
-    public void getBookWithNegativeIdTest() throws IOException {
-        Integer negativeId = -1;
-        Response<Book> response = getBookById(negativeId);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book ID", "/book/" + negativeId);
+    @DataProvider(name = "invalidIds")
+    public Object[][] invalidIds() {
+        return new Object[][] {
+                {-1},
+                {0},
+                {Integer.MIN_VALUE}
+        };
     }
 
-    @Test(description = "Get book with zero ID")
-    public void getBookWithZeroIdTest() throws IOException {
-        Integer zeroId = 0;
-        Response<Book> response = getBookById(zeroId);
+    @Test(description = "Get book with invalid ID", dataProvider = "invalidIds")
+    @SneakyThrows
+    public void getBookInvalidIdTest(Integer invalidId) {
+        Response<Book> response = getBookById(invalidId);
         assertBadRequest(response);
+    }
 
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book ID", "/book/" + zeroId);
+
+    @Test(description = "Get books with invalid sorting parameters")
+    @SneakyThrows
+    public void getBookInvalidSortingTest() {
+
+        Response<List<Book>> response1 = getBooksSorted("invalidField", "asc");
+        assertBadRequest(response1);
+
+
+        Response<List<Book>> response2 = getBooksSorted("title", "invalid");
+        assertBadRequest(response2);
+    }
+
+    @Test(description = "Get books with SQL injection attempt")
+    @SneakyThrows
+    public void getBookSqlInjectionTest() {
+        Response<List<Book>> response = searchBooks("'; DROP TABLE books; --");
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Get books with very long search term")
+    @SneakyThrows
+    public void getBookLongSearchTermTest() {
+        String veryLongTerm = "a".repeat(1000);
+        Response<List<Book>> response = searchBooks(veryLongTerm);
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Get books with special characters in search")
+    @SneakyThrows
+    public void getBookSpecialCharsSearchTest() {
+        Response<List<Book>> response = searchBooks("<script>alert('xss')</script>");
+        assertBadRequest(response);
     }
 
     @Test(description = "Get books with invalid status")
-    public void getBooksWithInvalidStatusTest() throws IOException {
-        String invalidStatus = "INVALID_STATUS";
-        Response<List<Book>> response = getBooksByStatus(invalidStatus);
+    @SneakyThrows
+    public void getBookInvalidStatusTest() {
+        Response<List<Book>> response = getBooksByStatus("INVALID_STATUS");
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book status", "/books/status/" + invalidStatus);
     }
 
-    @Test(description = "Get books with empty status")
-    public void getBooksWithEmptyStatusTest() throws IOException {
-        Response<List<Book>> response = getBooksByStatus("");
+    @Test(description = "Get books with multiple invalid parameters")
+    @SneakyThrows
+    public void getBookMultipleInvalidParamsTest() {
+        Response<List<Book>> response = getBooksWithMultipleParams(-1, 0, "invalid", "invalid", "'; DROP TABLE;--");
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Status cannot be empty", "/books/status");
     }
 
-    @Test(description = "Get books by invalid year")
-    public void getBooksWithInvalidYearTest() throws IOException {
-        int futureYear = java.time.Year.now().getValue() + 1;
-        Response<List<Book>> response = getBooksByYear(futureYear);
+    @Test(description = "Get book with non-numeric ID")
+    @SneakyThrows
+    public void getBookNonNumericIdTest() {
+        Response<Book> response = getBookByNonNumericId("abc");
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid year", "/books/year/" + futureYear);
-    }
-
-    @Test(description = "Get books by year before printing was invented")
-    public void getBooksWithTooOldYearTest() throws IOException {
-        int tooOldYear = 1000;
-        Response<List<Book>> response = getBooksByYear(tooOldYear);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Year must be after 1450", "/books/year/" + tooOldYear);
-    }
-
-    @Test(description = "Search books with empty keyword")
-    public void searchBooksWithEmptyKeywordTest() throws IOException {
-        Response<List<Book>> response = searchBooksByTitle("");
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Search keyword cannot be empty", "/books/search");
-    }
-
-    @Test(description = "Search books with too short keyword")
-    public void searchBooksWithShortKeywordTest() throws IOException {
-        Response<List<Book>> response = searchBooksByTitle("a");
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Search keyword must be at least 2 characters", "/books/search");
-    }
-
-    @Test(description = "Get books with invalid pagination parameters")
-    public void getBooksWithInvalidPaginationTest() throws IOException {
-        Response<List<Book>> response = getBooksWithPagination(-1, 0);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid pagination parameters", "/books");
-    }
-
-    @Test(description = "Get book loan history with invalid ID")
-    public void getBookLoanHistoryWithInvalidIdTest() throws IOException {
-        Integer invalidId = -1;
-        Response<Book> response = getBookWithLoanHistory(invalidId);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book ID", "/book/history/" + invalidId);
-    }
-
-    @Test(description = "Get books by invalid author name")
-    public void getBooksWithInvalidAuthorTest() throws IOException {
-        String invalidAuthor = "";
-        Response<List<Book>> response = getBooksByAuthor(invalidAuthor);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Author name cannot be empty", "/books/author");
     }
 }

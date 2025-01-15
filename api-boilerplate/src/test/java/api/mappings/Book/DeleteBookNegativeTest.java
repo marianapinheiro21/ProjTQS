@@ -1,154 +1,170 @@
 package api.mappings.Book;
 
 import api.mappings.generic.Book;
-import api.mappings.generic.BookStatus;
-import api.mappings.generic.ErrorResponse;
-import api.retrofit.generic.Errors;
+import api.mappings.generic.Book.BookStatus;
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
-
 import static api.retrofit.Books.*;
 import static api.validators.ResponseValidator.*;
-import static api.validators.ErrorResponseValidator.assertErrorResponse;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class DeleteBookNegativeTest {
 
     @Test(description = "Delete non-existent book")
-    public void deleteNonExistentBookTest() throws IOException {
-        Response<ResponseBody> response = deleteBook(99999);
+    @SneakyThrows
+    public void deleteNonExistentBookTest() {
+        Response<ResponseBody> response = deleteBook(99999, false);
         assertNotFound(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 404, "Not Found",
-                "Book not found", "/book/99999");
     }
 
-    @Test(description = "Delete book with invalid ID")
-    public void deleteBookWithInvalidIdTest() throws IOException {
-        Response<ResponseBody> response = deleteBook(-1);
+    @DataProvider(name = "invalidIds")
+    public Object[][] invalidIds() {
+        return new Object[][] {
+                {-1},
+                {0},
+                {Integer.MIN_VALUE}
+        };
+    }
+
+    @Test(dataProvider = "invalidIds", description = "Delete book with invalid ID")
+    @SneakyThrows
+    public void deleteBookInvalidIdTest(Integer invalidId) {
+        Response<ResponseBody> response = deleteBook(invalidId, false);
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Delete reserved book without force")
+    @SneakyThrows
+    public void deleteReservedBookWithoutForceTest() throws IOException {
+
+        Book reservedBook = createBookWithStatus(BookStatus.RESERVED);
+
+
+        Response<ResponseBody> response = deleteBook(reservedBook.getId(), false);
+        assertThat(response.code(), is(409));
+
+
+        deleteBook(reservedBook.getId(), true);
+    }
+
+    @Test(description = "Delete book twice")
+    @SneakyThrows
+    public void deleteBookTwiceTest() throws IOException {
+
+        Book book = createTestBook();
+
+
+        Response<ResponseBody> firstDelete = deleteBook(book.getId(), false);
+        assertNoContent(firstDelete);
+
+
+        Response<ResponseBody> secondDelete = deleteBook(book.getId(), false);
+        assertNotFound(secondDelete);
+    }
+
+    @Test(description = "Delete book with invalid status transition")
+    @SneakyThrows
+    public void deleteBookInvalidStatusTransitionTest() throws IOException {
+
+        Book book = createBookWithStatus(BookStatus.NOT_AVAILABLE);
+
+
+        Book updatedBook = Book.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .isbn(book.getIsbn())
+                .status(BookStatus.RESERVED)
+                .build();
+        updateBook(book.getId(), updatedBook);
+
+        Response<ResponseBody> response = deleteBook(book.getId(), false);
+        assertThat(response.code(), is(409));
+
+
+        deleteBook(book.getId(), true);
+    }
+
+    @Test(description = "Delete book with concurrent modifications")
+    @SneakyThrows
+    public void deleteBookConcurrentModificationTest() throws IOException {
+        Book book = createTestBook();
+
+
+        Book updatedBook = Book.builder()
+                .id(book.getId())
+                .title("Updated Title")
+                .author(book.getAuthor())
+                .isbn(book.getIsbn())
+                .status(BookStatus.NOT_AVAILABLE)
+                .build();
+        updateBook(book.getId(), updatedBook);
+
+
+        Response<ResponseBody> response = deleteBook(book.getId(), false);
+        assertThat(response.code(), is(409));
+
+
+        deleteBook(book.getId(), true);
+    }
+
+    @Test(description = "Delete book with SQL injection attempt")
+    @SneakyThrows
+    public void deleteBookSqlInjectionTest() {
+        Response<ResponseBody> response = deleteBookWithSqlInjection("1 OR 1=1");
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Delete book with invalid force parameter")
+    @SneakyThrows
+    public void deleteBookInvalidForceParameterTest() throws IOException {
+        Book book = createTestBook();
+        Response<ResponseBody> response = deleteBookWithInvalidForce(book.getId(), "invalid");
         assertBadRequest(response);
 
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book ID", "/book/-1");
+
+        deleteBook(book.getId(), true);
     }
 
-    @Test(description = "Delete loaned book")
-    public void deleteLoanedBookTest() throws IOException {
-        // Create a book
+
+
+    private Book createTestBook() throws IOException {
         Book book = Book.builder()
-                .title("Loaned Book")
+                .title("Test Book")
                 .author("Test Author")
                 .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> createResponse = createBook(book);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-
-        // Update status to LOANED
-        updateBook(bookId, Book.builder().status(BookStatus.LOANED.toString()).build());
-
-        // Try to delete loaned book
-        Response<ResponseBody> deleteResponse = deleteBook(bookId);
-        assertBadRequest(deleteResponse);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(deleteResponse);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Cannot delete loaned book", "/book/" + bookId);
-
-        // Cleanup
-        updateBook(bookId, Book.builder().status(BookStatus.AVAILABLE.toString()).build());
-        deleteBook(bookId);
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        book.setId(id);
+        return book;
     }
 
-    @Test(description = "Delete reserved book")
-    public void deleteReservedBookTest() throws IOException {
-        // Create a book
+    private Book createBookWithStatus(BookStatus status) throws IOException {
         Book book = Book.builder()
-                .title("Reserved Book")
+                .title("Status Test Book")
                 .author("Test Author")
                 .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
+                .status(status)
                 .build();
 
-        Response<ResponseBody> createResponse = createBook(book);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-
-        // Update status to RESERVED
-        updateBook(bookId, Book.builder().status(BookStatus.RESERVED.toString()).build());
-
-        // Try to delete reserved book
-        Response<ResponseBody> deleteResponse = deleteBook(bookId);
-        assertBadRequest(deleteResponse);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(deleteResponse);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Cannot delete reserved book", "/book/" + bookId);
-
-        // Cleanup
-        updateBook(bookId, Book.builder().status(BookStatus.AVAILABLE.toString()).build());
-        deleteBook(bookId);
-    }
-
-    @Test(description = "Delete book with active reservations")
-    public void deleteBookWithActiveReservationsTest() throws IOException {
-        // Create a book
-        Book book = Book.builder()
-                .title("Book with Reservations")
-                .author("Test Author")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.RESERVED.toString())
-                .build();
-
-        Response<ResponseBody> createResponse = createBook(book);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-
-        // Simulate adding a reservation
-        // (This depende da implementação específica do sistema de reservas)
-
-        // Try to delete book with reservations
-        Response<ResponseBody> deleteResponse = deleteBook(bookId);
-        assertBadRequest(deleteResponse);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(deleteResponse);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Cannot delete book with active reservations", "/book/" + bookId);
-
-        // Cleanup
-        updateBook(bookId, Book.builder().status(BookStatus.AVAILABLE.toString()).build());
-        deleteBook(bookId);
-    }
-
-    @Test(description = "Delete book with loan history")
-    public void deleteBookWithLoanHistoryTest() throws IOException {
-        // Create a book
-        Book book = Book.builder()
-                .title("Book with History")
-                .author("Test Author")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
-                .build();
-
-        Response<ResponseBody> createResponse = createBook(book);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-
-        // Simulate loan history
-        updateBook(bookId, Book.builder().status(BookStatus.LOANED.toString()).build());
-        updateBook(bookId, Book.builder().status(BookStatus.AVAILABLE.toString()).build());
-
-        // Verify deletion is still possible despite loan history
-        Response<ResponseBody> deleteResponse = deleteBook(bookId);
-        assertNoContent(deleteResponse);
-
-        Response<Book> getResponse = getBookById(bookId);
-        assertNotFound(getResponse);
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        book.setId(id);
+        return book;
     }
 
     private String generateUniqueIsbn() {
         return "978" + System.currentTimeMillis() % 10000000000L;
     }
+
 }

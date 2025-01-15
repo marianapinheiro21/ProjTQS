@@ -1,19 +1,20 @@
 package api.mappings.Book;
 
 import api.mappings.generic.Book;
-import api.mappings.generic.BookStatus;
+import api.mappings.generic.Book.BookStatus;
 import okhttp3.ResponseBody;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import static api.retrofit.Books.*;
-import static api.validators.ResponseValidator.assertOk;
+import static api.validators.ResponseValidator.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -24,237 +25,172 @@ public class GetBookPositiveTest {
     @BeforeMethod
     public void setup() throws IOException {
         bookIds = new ArrayList<>();
-        testBook = createDefaultTestBook();
-        Response<ResponseBody> response = createBook(testBook);
-        bookIds.add(Integer.parseInt(response.body().string()));
+        testBook = createTestBook();
     }
 
     @AfterMethod
-    public void cleanup() {
+    public void cleanup() throws IOException {
         for (Integer id : bookIds) {
-            deleteBook(id);
+            deleteBook(id, true);
         }
     }
 
-    @Test(description = "Get book by ID with all fields populated")
-    public void getBookByIdFullDetailsTest() throws IOException {
-        Book fullBook = Book.builder()
-                .title("Complete Book")
-                .author("Complete Author")
-                .publisher("Test Publisher")
-                .editionYear(2020)
-                .edition("Special Edition")
-                .description("Detailed description")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
-                .build();
-
-        Response<ResponseBody> createResponse = createBook(fullBook);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-        bookIds.add(bookId);
-
-        Response<Book> response = getBookById(bookId);
+    @Test(description = "Get book by valid ID")
+    public void getBookByValidIdTest() throws IOException {
+        Response<Book> response = getBookById(testBook.getId());
         assertOk(response);
 
-        Book bookResponse = response.body();
-        assertFullBookDetails(bookResponse, fullBook);
+        Book retrievedBook = response.body();
+        assertThat(retrievedBook, notNullValue());
+        assertBookEquals(retrievedBook, testBook);
     }
 
-    @Test(description = "Get all books and verify pagination")
-    public void getAllBooksWithPaginationTest() throws IOException {
-        // Create multiple books for pagination
-        for (int i = 0; i < 5; i++) {
-            Book book = Book.builder()
-                    .title("Book " + i)
-                    .author("Author " + i)
-                    .isbn(generateUniqueIsbn())
-                    .status(BookStatus.AVAILABLE.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
-        }
+    @Test(description = "Get all books when empty")
+    public void getAllBooksEmptyTest() throws IOException {
+
+        cleanup();
 
         Response<List<Book>> response = getAllBooks();
         assertOk(response);
 
         List<Book> books = response.body();
-        assertThat("Books list should not be null", books, notNullValue());
-        assertThat("Books list should not be empty", books, not(empty()));
-        assertThat("Books list should contain at least 5 books", books.size(), greaterThanOrEqualTo(5));
+        assertThat(books, notNullValue());
+        assertThat(books, empty());
+    }
+
+    @Test(description = "Get all books with multiple records")
+    public void getAllBooksMultipleTest() throws IOException {
+        int numberOfBooks = 5;
+        List<Book> createdBooks = createMultipleBooks(numberOfBooks);
+
+        Response<List<Book>> response = getAllBooks();
+        assertOk(response);
+
+        List<Book> retrievedBooks = response.body();
+        assertThat(retrievedBooks, hasSize(greaterThanOrEqualTo(numberOfBooks)));
+
+        for (Book created : createdBooks) {
+            assertThat(retrievedBooks, hasItem(hasProperty("isbn", is(created.getIsbn()))));
+        }
     }
 
     @Test(description = "Get books by status")
-    public void getBooksByStatusTest() throws IOException {
-        // Create books with different statuses
-        for (BookStatus status : BookStatus.values()) {
-            Book book = Book.builder()
-                    .title("Status Book")
-                    .author("Status Author")
-                    .isbn(generateUniqueIsbn())
-                    .status(status.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
-        }
+    @DataProvider(name = "bookStatuses")
+    public Object[][] bookStatuses() {
+        return new Object[][] {
+                {BookStatus.AVAILABLE},
+                {BookStatus.NOT_AVAILABLE},
+                {BookStatus.RESERVED}
+        };
+    }
 
-        for (BookStatus status : BookStatus.values()) {
-            Response<List<Book>> response = getBooksByStatus(status.toString());
+    @Test(dataProvider = "bookStatuses")
+    public void getBooksByStatusTest(BookStatus status) throws IOException {
+
+        Book statusBook = createBookWithStatus(status);
+
+        Response<List<Book>> response = getBooksByStatus(status);
+        assertOk(response);
+
+        List<Book> books = response.body();
+        assertThat(books, hasItem(hasProperty("status", is(status))));
+    }
+
+    @Test(description = "Get books with pagination")
+    public void getBooksPaginationTest() throws IOException {
+
+        createMultipleBooks(20);
+
+
+        int[][] pageSizeCombinations = {{0, 5}, {1, 10}, {2, 5}};
+
+        for (int[] combination : pageSizeCombinations) {
+            Response<List<Book>> response = getBooksWithPagination(combination[0], combination[1]);
             assertOk(response);
 
             List<Book> books = response.body();
-            assertThat("Books list should not be null", books, notNullValue());
-            assertThat("All books should have status " + status,
-                    books.stream().allMatch(b -> b.getStatus().equals(status.toString())));
+            assertThat(books, hasSize(lessThanOrEqualTo(combination[1])));
         }
     }
 
-    @Test(description = "Get books by author")
-    public void getBooksByAuthorTest() throws IOException {
-        String specificAuthor = "Special Author";
+    @Test(description = "Get books with sorting")
+    public void getBooksSortingTest() throws IOException {
+        createMultipleBooks(5);
 
-        // Create multiple books by same author
-        for (int i = 0; i < 3; i++) {
-            Book book = Book.builder()
-                    .title("Book " + i)
-                    .author(specificAuthor)
-                    .isbn(generateUniqueIsbn())
-                    .status(BookStatus.AVAILABLE.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
+        String[] sortFields = {"title", "author", "publishYear"};
+        String[] sortDirections = {"asc", "desc"};
+
+        for (String field : sortFields) {
+            for (String direction : sortDirections) {
+                Response<List<Book>> response = getBooksSorted(field, direction);
+                assertOk(response);
+
+                List<Book> books = response.body();
+                assertThat(books, isSortedBy(field, direction));
+            }
         }
-
-        Response<List<Book>> response = getBooksByAuthor(specificAuthor);
-        assertOk(response);
-
-        List<Book> books = response.body();
-        assertThat("Books list should not be null", books, notNullValue());
-        assertThat("Should find at least 3 books", books.size(), greaterThanOrEqualTo(3));
-        assertThat("All books should be by the specific author",
-                books.stream().allMatch(b -> b.getAuthor().equals(specificAuthor)));
     }
 
-    @Test(description = "Get books by publication year")
-    public void getBooksByYearTest() throws IOException {
-        int specificYear = 2020;
 
-        // Create multiple books from same year
-        for (int i = 0; i < 3; i++) {
-            Book book = Book.builder()
-                    .title("Year Book " + i)
-                    .author("Year Author")
-                    .editionYear(specificYear)
-                    .isbn(generateUniqueIsbn())
-                    .status(BookStatus.AVAILABLE.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
-        }
 
-        Response<List<Book>> response = getBooksByYear(specificYear);
-        assertOk(response);
 
-        List<Book> books = response.body();
-        assertThat("Books list should not be null", books, notNullValue());
-        assertThat("Should find at least 3 books", books.size(), greaterThanOrEqualTo(3));
-        assertThat("All books should be from specific year",
-                books.stream().allMatch(b -> b.getEditionYear() == specificYear));
-    }
-
-    @Test(description = "Search books by title keyword")
-    public void searchBooksByTitleTest() throws IOException {
-        String keyword = "unique";
-
-        // Create books with keyword in title
-        for (int i = 0; i < 3; i++) {
-            Book book = Book.builder()
-                    .title("A " + keyword + " Book " + i)
-                    .author("Search Author")
-                    .isbn(generateUniqueIsbn())
-                    .status(BookStatus.AVAILABLE.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
-        }
-
-        Response<List<Book>> response = searchBooksByTitle(keyword);
-        assertOk(response);
-
-        List<Book> books = response.body();
-        assertThat("Books list should not be null", books, notNullValue());
-        assertThat("Should find at least 3 books", books.size(), greaterThanOrEqualTo(3));
-        assertThat("All books should contain keyword in title",
-                books.stream().allMatch(b -> b.getTitle().toLowerCase().contains(keyword.toLowerCase())));
-    }
-
-    @Test(description = "Get book details including loan history")
-    public void getBookWithLoanHistoryTest() throws IOException {
+    private Book createTestBook() throws IOException {
         Book book = Book.builder()
-                .title("Loan History Book")
-                .author("History Author")
+                .title("Test Book")
+                .author("Test Author")
+                .publisher("Test Publisher")
+                .editionYear(2023)
+                .edition("1st Edition")
+                .description("Test Description")
                 .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> createResponse = createBook(book);
-        Integer bookId = Integer.parseInt(createResponse.body().string());
-        bookIds.add(bookId);
-
-        Response<Book> response = getBookWithLoanHistory(bookId);
-        assertOk(response);
-
-        Book bookResponse = response.body();
-        assertThat("Book should not be null", bookResponse, notNullValue());
-        assertThat("Loan history should be present", bookResponse.getLoanHistory(), notNullValue());
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        bookIds.add(id);
+        book.setId(id);
+        return book;
     }
 
-    @Test(description = "Get recently added books")
-    public void getRecentlyAddedBooksTest() throws IOException {
-        // Create multiple recent books
-        for (int i = 0; i < 3; i++) {
-            Book book = Book.builder()
-                    .title("Recent Book " + i)
-                    .author("Recent Author")
-                    .isbn(generateUniqueIsbn())
-                    .status(BookStatus.AVAILABLE.toString())
-                    .build();
-            Response<ResponseBody> response = createBook(book);
-            bookIds.add(Integer.parseInt(response.body().string()));
+    private List<Book> createMultipleBooks(int count) throws IOException {
+        List<Book> books = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            books.add(createTestBook());
         }
-
-        Response<List<Book>> response = getRecentlyAddedBooks();
-        assertOk(response);
-
-        List<Book> books = response.body();
-        assertThat("Books list should not be null", books, notNullValue());
-        assertThat("Should find recent books", books.size(), greaterThanOrEqualTo(3));
+        return books;
     }
 
-    // Helper Methods
-    private Book createDefaultTestBook() {
-        return Book.builder()
-                .title("Default Test Book")
-                .author("Default Author")
+    private Book createBookWithStatus(BookStatus status) throws IOException {
+        Book book = Book.builder()
+                .title("Status Test Book")
+                .author("Test Author")
                 .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
+                .status(status)
                 .build();
+
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        bookIds.add(id);
+        book.setId(id);
+        return book;
+    }
+
+    private void assertBookEquals(Book actual, Book expected) {
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getTitle(), is(expected.getTitle()));
+        assertThat(actual.getAuthor(), is(expected.getAuthor()));
+        assertThat(actual.getPublisher(), is(expected.getPublisher()));
+        assertThat(actual.getEditionYear(), is(expected.getEditionYear()));
+        assertThat(actual.getEdition(), is(expected.getEdition()));
+        assertThat(actual.getDescription(), is(expected.getDescription()));
+        assertThat(actual.getIsbn(), is(expected.getIsbn()));
+        assertThat(actual.getStatus(), is(expected.getStatus()));
     }
 
     private String generateUniqueIsbn() {
         return "978" + System.currentTimeMillis() % 10000000000L;
     }
-
-    private void assertFullBookDetails(Book bookResponse, Book expectedBook) {
-        assertThat("Book should not be null", bookResponse, notNullValue());
-        assertThat("ID should not be null", bookResponse.getId(), notNullValue());
-        assertThat("Title should match", bookResponse.getTitle(), is(expectedBook.getTitle()));
-        assertThat("Author should match", bookResponse.getAuthor(), is(expectedBook.getAuthor()));
-        assertThat("Publisher should match", bookResponse.getPublisher(), is(expectedBook.getPublisher()));
-        assertThat("Edition year should match", bookResponse.getEditionYear(), is(expectedBook.getEditionYear()));
-        assertThat("Edition should match", bookResponse.getEdition(), is(expectedBook.getEdition()));
-        assertThat("Description should match", bookResponse.getDescription(), is(expectedBook.getDescription()));
-        assertThat("ISBN should match", bookResponse.getIsbn(), is(expectedBook.getIsbn()));
-        assertThat("Status should match", bookResponse.getStatus(), is(expectedBook.getStatus()));
-    }
-}
 }

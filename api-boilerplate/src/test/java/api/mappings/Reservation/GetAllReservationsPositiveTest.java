@@ -65,7 +65,7 @@ public class GetAllReservationsPositiveTest {
         assertThat(reservations, notNullValue());
         assertThat(reservations.size(), greaterThanOrEqualTo(3));
 
-        
+
         for (Reservation reservation : reservations) {
             assertValidReservationStructure(reservation);
         }
@@ -105,7 +105,7 @@ public class GetAllReservationsPositiveTest {
             Integer bookId = Integer.parseInt(bookResponse.body().string());
             bookIds.add(bookId);
 
-            // Criar reserva
+
             Response<ResponseBody> reservationResponse = createReservation(generateMemberId(), bookId);
             assertCreated(reservationResponse);
             Integer reservationId = Integer.parseInt(reservationResponse.body().string());

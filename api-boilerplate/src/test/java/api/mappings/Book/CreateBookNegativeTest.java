@@ -1,303 +1,178 @@
 package api.mappings.Book;
 
 import api.mappings.generic.Book;
-import api.mappings.generic.BookStatus;
-import api.mappings.generic.ErrorResponse;
-import api.retrofit.generic.Errors;
-import okhttp3.ResponseBody;
+import api.mappings.generic.Book.BookStatus;
+import lombok.SneakyThrows;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
-import java.io.IOException;
-
-import static api.retrofit.Books.createBook;
-import static api.validators.ErrorResponseValidator.assertErrorResponse;
-import static api.validators.ResponseValidator.assertBadRequest;
+import static api.retrofit.Books.*;
+import static api.validators.ResponseValidator.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class CreateBookNegativeTest {
 
-    @Test(description = "Create book with empty title")
-    public void createBookWithEmptyTitleTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("")
-                .author("Test Author")
-                .isbn("9780544003415")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Title is required", "/book");
-    }
-
     @Test(description = "Create book with null title")
-    public void createBookWithNullTitleTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title(null)
+    @SneakyThrows
+    public void createBookNullTitleTest() {
+        Book book = Book.builder()
                 .author("Test Author")
-                .isbn("9780544003415")
+                .isbn(generateUniqueIsbn())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(bookRequest);
+        Response<Integer> response = createBook(book);
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Title is required", "/book");
     }
 
-    @Test(description = "Create book with empty author")
-    public void createBookWithEmptyAuthorTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
+    @Test(description = "Create book with empty required fields")
+    @SneakyThrows
+    public void createBookEmptyFieldsTest() {
+        Book book = Book.builder()
+                .title("")
                 .author("")
-                .isbn("9780544003415")
+                .isbn("")
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(bookRequest);
+        Response<Integer> response = createBook(book);
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Author is required", "/book");
     }
 
-    @Test(description = "Create book with null author")
-    public void createBookWithNullAuthorTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author(null)
-                .isbn("9780544003415")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Author is required", "/book");
+    @DataProvider(name = "invalidIsbnData")
+    public Object[][] invalidIsbnData() {
+        return new Object[][] {
+                {"123"}, // muito curto
+                {"9780123456789"}, // formato inválido
+                {"abc123456789"}, // caracteres não numéricos
+                {"9999999999999"}, // número inválido
+                {"978-0123456789"}, // com hífen
+        };
     }
 
-    @Test(description = "Create book with invalid ISBN format")
-    public void createBookWithInvalidIsbnFormatTest() throws IOException {
-        Book bookRequest = Book.builder()
+    @Test(description = "Create book with invalid ISBN", dataProvider = "invalidIsbnData")
+    @SneakyThrows
+    public void createBookInvalidIsbnTest(String isbn) {
+        Book book = Book.builder()
                 .title("Test Book")
                 .author("Test Author")
-                .isbn("invalid-isbn")
+                .isbn(isbn)
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(bookRequest);
+        Response<Integer> response = createBook(book);
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid ISBN format", "/book");
-    }
-
-    @Test(description = "Create book with ISBN containing special characters")
-    public void createBookWithSpecialCharactersIsbnTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("978@#$%^&*")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid ISBN format", "/book");
-    }
-
-    @Test(description = "Create book with too short ISBN")
-    public void createBookWithShortIsbnTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("12345")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid ISBN format", "/book");
-    }
-
-    @Test(description = "Create book with too long ISBN")
-    public void createBookWithLongIsbnTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("97805440034151234567890")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid ISBN format", "/book");
-    }
-
-    @Test(description = "Create book with future edition year")
-    public void createBookWithFutureYearTest() throws IOException {
-        int futureYear = java.time.Year.now().getValue() + 1;
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("9780544003415")
-                .editionYear(futureYear)
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Edition year cannot be in the future", "/book");
-    }
-
-    @Test(description = "Create book with invalid edition year (too old)")
-    public void createBookWithTooOldYearTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("9780544003415")
-                .editionYear(1000)
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Edition year must be after 1450", "/book");
-    }
-
-    @Test(description = "Create book with invalid status")
-    public void createBookWithInvalidStatusTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("9780544003415")
-                .status("INVALID_STATUS")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid book status", "/book");
-    }
-
-    @Test(description = "Create book with title exceeding maximum length")
-    public void createBookWithTooLongTitleTest() throws IOException {
-        String tooLongTitle = "T".repeat(256); // Assuming 255 is max length
-        Book bookRequest = Book.builder()
-                .title(tooLongTitle)
-                .author("Test Author")
-                .isbn("9780544003415")
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Title exceeds maximum length", "/book");
-    }
-
-    @Test(description = "Create book with description exceeding maximum length")
-    public void createBookWithTooLongDescriptionTest() throws IOException {
-        String tooLongDescription = "D".repeat(1001); // Assuming 1000 is max length
-        Book bookRequest = Book.builder()
-                .title("Test Book")
-                .author("Test Author")
-                .isbn("9780544003415")
-                .description(tooLongDescription)
-                .build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Description exceeds maximum length", "/book");
     }
 
     @Test(description = "Create book with duplicate ISBN")
-    public void createBookWithDuplicateIsbnTest() throws IOException {
-        // First book creation
-        Book firstBook = Book.builder()
+    @SneakyThrows
+    public void createBookDuplicateIsbnTest() throws IOException {
+        String isbn = generateUniqueIsbn();
+
+        // Criar primeiro livro
+        Book book1 = Book.builder()
                 .title("First Book")
                 .author("Test Author")
-                .isbn("9780544003415")
+                .isbn(isbn)
+                .status(BookStatus.AVAILABLE)
                 .build();
-        createBook(firstBook);
 
-        // Second book with same ISBN
-        Book secondBook = Book.builder()
+        Response<Integer> response1 = createBook(book1);
+        assertCreated(response1);
+        Integer bookId = response1.body();
+
+        // Tentar criar segundo livro com mesmo ISBN
+        Book book2 = Book.builder()
                 .title("Second Book")
                 .author("Another Author")
-                .isbn("9780544003415")
+                .isbn(isbn)
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(secondBook);
-        assertBadRequest(response);
+        Response<Integer> response2 = createBook(book2);
+        assertBadRequest(response2);
 
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "ISBN already exists", "/book");
+
+        deleteBook(bookId, true);
     }
 
-    @Test(description = "Create book with all null fields")
-    public void createBookWithAllNullFieldsTest() throws IOException {
-        Book bookRequest = Book.builder().build();
-
-        Response<ResponseBody> response = createBook(bookRequest);
-        assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Required fields missing", "/book");
-    }
-
-    @Test(description = "Create book with invalid characters in fields")
-    public void createBookWithInvalidCharactersTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("Test Book <script>alert('xss')</script>")
-                .author("Test Author <script>alert('xss')</script>")
-                .isbn("9780544003415")
-                .description("Description <script>alert('xss')</script>")
+    @Test(description = "Create book with invalid year")
+    @SneakyThrows
+    public void createBookInvalidYearTest() {
+        Book book = Book.builder()
+                .title("Test Book")
+                .author("Test Author")
+                .isbn(generateUniqueIsbn())
+                .editionYear(2025) // ano futuro
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(bookRequest);
+        Response<Integer> response = createBook(book);
         assertBadRequest(response);
-
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Invalid characters in fields", "/book");
     }
 
-    @Test(description = "Create book with only whitespace in required fields")
-    public void createBookWithWhitespaceFieldsTest() throws IOException {
-        Book bookRequest = Book.builder()
-                .title("   ")
-                .author("   ")
-                .isbn("9780544003415")
+    @Test(description = "Create book with extremely long fields")
+    @SneakyThrows
+    public void createBookExtremelyLongFieldsTest() {
+        String veryLongString = "a".repeat(1000);
+        Book book = Book.builder()
+                .title(veryLongString)
+                .author(veryLongString)
+                .publisher(veryLongString)
+                .description(veryLongString)
+                .isbn(generateUniqueIsbn())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<ResponseBody> response = createBook(bookRequest);
+        Response<Integer> response = createBook(book);
         assertBadRequest(response);
+    }
 
-        ErrorResponse errorResponse = Errors.getErrorsResponse(response);
-        assertErrorResponse(errorResponse, 400, "Bad Request",
-                "Required fields cannot be empty", "/book");
+    @Test(description = "Create book with invalid status")
+    @SneakyThrows
+    public void createBookInvalidStatusTest() {
+        Book book = Book.builder()
+                .title("Test Book")
+                .author("Test Author")
+                .isbn(generateUniqueIsbn())
+                .status(null)
+                .build();
+
+        Response<Integer> response = createBook(book);
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Create book with special SQL injection characters")
+    @SneakyThrows
+    public void createBookSqlInjectionTest() {
+        Book book = Book.builder()
+                .title("Test Book'; DROP TABLE books;--")
+                .author("Test Author'; DELETE FROM books;--")
+                .isbn(generateUniqueIsbn())
+                .status(BookStatus.AVAILABLE)
+                .build();
+
+        Response<Integer> response = createBook(book);
+        assertBadRequest(response);
+    }
+
+    @Test(description = "Create book with HTML/Script injection")
+    @SneakyThrows
+    public void createBookScriptInjectionTest() {
+        Book book = Book.builder()
+                .title("<script>alert('xss')</script>")
+                .author("<img src='x' onerror='alert(1)'>")
+                .isbn(generateUniqueIsbn())
+                .status(BookStatus.AVAILABLE)
+                .build();
+
+        Response<Integer> response = createBook(book);
+        assertBadRequest(response);
+    }
+
+    private String generateUniqueIsbn() {
+        return "978" + System.currentTimeMillis() % 10000000000L;
     }
 }

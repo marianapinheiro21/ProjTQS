@@ -1,134 +1,227 @@
 package api.mappings.Book;
 
 import api.mappings.generic.Book;
-import api.mappings.generic.BookStatus;
+import api.mappings.generic.Book.BookStatus;
 import okhttp3.ResponseBody;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static api.retrofit.Books.*;
-import static api.validators.ResponseValidator.assertOk;
+import static api.validators.ResponseValidator.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class UpdateBookPositiveTest {
-    private Integer bookId;
+    private List<Integer> bookIds;
     private Book originalBook;
 
     @BeforeMethod
     public void setup() throws IOException {
-        originalBook = Book.builder()
-                .title("Original Title")
-                .author("Original Author")
-                .publisher("Original Publisher")
-                .editionYear(2020)
-                .edition("First Edition")
-                .description("Original Description")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE.toString())
-                .build();
-
-        Response<ResponseBody> response = createBook(originalBook);
-        bookId = Integer.parseInt(response.body().string());
+        bookIds = new ArrayList<>();
+        originalBook = createTestBook();
     }
 
     @AfterMethod
-    public void cleanup() {
-        if (bookId != null) {
-            deleteBook(bookId);
+    public void cleanup() throws IOException {
+        for (Integer id : bookIds) {
+            deleteBook(id, true);
         }
     }
 
-    @Test(description = "Update all book fields")
-    public void updateAllBookFieldsTest() throws IOException {
-        Book updateRequest = Book.builder()
+    @Test(description = "Update all fields of a book")
+    public void updateAllFieldsTest() throws IOException {
+        Book updatedBook = Book.builder()
+                .id(originalBook.getId())
                 .title("Updated Title")
                 .author("Updated Author")
                 .publisher("Updated Publisher")
-                .editionYear(2021)
-                .edition("Second Edition")
+                .editionYear(2023)
+                .edition("2nd Edition")
                 .description("Updated Description")
-                .status(BookStatus.NOT_AVAILABLE.toString())
+                .isbn(originalBook.getIsbn())
+                .status(BookStatus.NOT_AVAILABLE)
                 .build();
 
-        Response<Book> response = updateBook(bookId, updateRequest);
-        assertOk(response);
+        Response<Integer> updateResponse = updateBook(originalBook.getId(), updatedBook);
+        assertOk(updateResponse);
 
-        Book updatedBook = response.body();
-        assertThat("Updated book should not be null", updatedBook, notNullValue());
-        assertThat("Title should be updated", updatedBook.getTitle(), is(updateRequest.getTitle()));
-        assertThat("Author should be updated", updatedBook.getAuthor(), is(updateRequest.getAuthor()));
-        assertThat("Publisher should be updated", updatedBook.getPublisher(), is(updateRequest.getPublisher()));
-        assertThat("Edition year should be updated", updatedBook.getEditionYear(), is(updateRequest.getEditionYear()));
-        assertThat("Edition should be updated", updatedBook.getEdition(), is(updateRequest.getEdition()));
-        assertThat("Description should be updated", updatedBook.getDescription(), is(updateRequest.getDescription()));
-        assertThat("Status should be updated", updatedBook.getStatus(), is(updateRequest.getStatus()));
+        validateUpdatedBook(updatedBook);
     }
 
-    @Test(description = "Update only book title")
-    public void updateBookTitleOnlyTest() throws IOException {
-        Book updateRequest = Book.builder()
-                .title("New Title Only")
+    @Test(description = "Update only required fields")
+    public void updateRequiredFieldsTest() throws IOException {
+        Book updatedBook = Book.builder()
+                .id(originalBook.getId())
+                .title("Updated Title")
+                .author("Updated Author")
+                .isbn(originalBook.getIsbn())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<Book> response = updateBook(bookId, updateRequest);
-        assertOk(response);
+        Response<Integer> updateResponse = updateBook(originalBook.getId(), updatedBook);
+        assertOk(updateResponse);
 
-        Book updatedBook = response.body();
-        assertThat("Title should be updated", updatedBook.getTitle(), is(updateRequest.getTitle()));
-        assertThat("Author should remain unchanged", updatedBook.getAuthor(), is(originalBook.getAuthor()));
+        validateUpdatedBook(updatedBook);
     }
 
-    @Test(description = "Update book status")
-    public void updateBookStatusTest() throws IOException {
-        Book updateRequest = Book.builder()
-                .status(BookStatus.RESERVED.toString())
-                .build();
-
-        Response<Book> response = updateBook(bookId, updateRequest);
-        assertOk(response);
-
-        Book updatedBook = response.body();
-        assertThat("Status should be updated", updatedBook.getStatus(), is(updateRequest.getStatus()));
+    @DataProvider(name = "statusTransitions")
+    public Object[][] statusTransitions() {
+        return new Object[][] {
+                {BookStatus.AVAILABLE, BookStatus.NOT_AVAILABLE},
+                {BookStatus.NOT_AVAILABLE, BookStatus.AVAILABLE},
+                {BookStatus.AVAILABLE, BookStatus.RESERVED},
+                {BookStatus.RESERVED, BookStatus.AVAILABLE}
+        };
     }
 
-    @Test(description = "Update book description with special characters")
-    public void updateBookDescriptionWithSpecialCharsTest() throws IOException {
-        String specialDescription = "Special chars: áéíóú ñ @ # $ % &";
-        Book updateRequest = Book.builder()
-                .description(specialDescription)
+    @Test(description = "Update book status", dataProvider = "statusTransitions")
+    public void updateBookStatusTest(BookStatus initialStatus, BookStatus newStatus) throws IOException {
+        // Criar livro com status inicial
+        Book statusBook = createBookWithStatus(initialStatus);
+
+        // Atualizar apenas o status
+        Book updatedBook = Book.builder()
+                .id(statusBook.getId())
+                .title(statusBook.getTitle())
+                .author(statusBook.getAuthor())
+                .isbn(statusBook.getIsbn())
+                .status(newStatus)
                 .build();
 
-        Response<Book> response = updateBook(bookId, updateRequest);
-        assertOk(response);
+        Response<Integer> updateResponse = updateBook(statusBook.getId(), updatedBook);
+        assertOk(updateResponse);
 
-        Book updatedBook = response.body();
-        assertThat("Description should be updated with special chars",
-                updatedBook.getDescription(), is(specialDescription));
+        validateUpdatedBook(updatedBook);
+    }
+
+    @Test(description = "Update book with special characters")
+    public void updateBookSpecialCharsTest() throws IOException {
+        Book updatedBook = Book.builder()
+                .id(originalBook.getId())
+                .title("áéíóú")
+                .author(" @#$%")
+                .publisher("publisher & co.")
+                .description("d ")
+                .isbn(originalBook.getIsbn())
+                .status(BookStatus.AVAILABLE)
+                .build();
+
+        Response<Integer> updateResponse = updateBook(originalBook.getId(), updatedBook);
+        assertOk(updateResponse);
+
+        validateUpdatedBook(updatedBook);
     }
 
     @Test(description = "Update book with maximum length fields")
-    public void updateBookWithMaxLengthFieldsTest() throws IOException {
-        String maxTitle = "T".repeat(255);
-        String maxDescription = "D".repeat(1000);
-
-        Book updateRequest = Book.builder()
-                .title(maxTitle)
-                .description(maxDescription)
+    public void updateBookMaxLengthTest() throws IOException {
+        String maxLength = "a".repeat(255); // Assumindo max length de 255
+        Book updatedBook = Book.builder()
+                .id(originalBook.getId())
+                .title(maxLength)
+                .author(maxLength)
+                .publisher(maxLength)
+                .description(maxLength)
+                .isbn(originalBook.getIsbn())
+                .status(BookStatus.AVAILABLE)
                 .build();
 
-        Response<Book> response = updateBook(bookId, updateRequest);
-        assertOk(response);
+        Response<Integer> updateResponse = updateBook(originalBook.getId(), updatedBook);
+        assertOk(updateResponse);
 
-        Book updatedBook = response.body();
-        assertThat("Title should be updated with max length", updatedBook.getTitle(), is(maxTitle));
-        assertThat("Description should be updated with max length",
-                updatedBook.getDescription(), is(maxDescription));
+        validateUpdatedBook(updatedBook);
+    }
+
+    @Test(description = "Update book multiple times")
+    public void updateBookMultipleTimesTest() throws IOException {
+        for (int i = 1; i <= 3; i++) {
+            Book updatedBook = Book.builder()
+                    .id(originalBook.getId())
+                    .title("Title Version " + i)
+                    .author("Author Version " + i)
+                    .publisher("Publisher Version " + i)
+                    .isbn(originalBook.getIsbn())
+                    .status(BookStatus.AVAILABLE)
+                    .build();
+
+            Response<Integer> updateResponse = updateBook(originalBook.getId(), updatedBook);
+            assertOk(updateResponse);
+
+            validateUpdatedBook(updatedBook);
+        }
+    }
+
+    // Métodos auxiliares
+
+    private Book createTestBook() throws IOException {
+        Book book = Book.builder()
+                .title("Original Book")
+                .author("Original Author")
+                .publisher("Original Publisher")
+                .editionYear(2022)
+                .edition("1st Edition")
+                .description("Original Description")
+                .isbn(generateUniqueIsbn())
+                .status(BookStatus.AVAILABLE)
+                .build();
+
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        bookIds.add(id);
+        book.setId(id);
+        return book;
+    }
+
+    private Book createBookWithStatus(BookStatus status) throws IOException {
+        Book book = Book.builder()
+                .title("Status Test Book")
+                .author("Test Author")
+                .isbn(generateUniqueIsbn())
+                .status(status)
+                .build();
+
+        Response<Integer> response = createBook(book);
+        assertCreated(response);
+        Integer id = response.body();
+        bookIds.add(id);
+        book.setId(id);
+        return book;
+    }
+
+    private void validateUpdatedBook(Book expectedBook) throws IOException {
+        Response<Book> getResponse = getBookById(expectedBook.getId());
+        assertOk(getResponse);
+
+        Book actualBook = getResponse.body();
+        assertBookEquals(actualBook, expectedBook);
+    }
+
+    private void assertBookEquals(Book actual, Book expected) {
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getTitle(), is(expected.getTitle()));
+        assertThat(actual.getAuthor(), is(expected.getAuthor()));
+        assertThat(actual.getIsbn(), is(expected.getIsbn()));
+        assertThat(actual.getStatus(), is(expected.getStatus()));
+
+        if (expected.getPublisher() != null) {
+            assertThat(actual.getPublisher(), is(expected.getPublisher()));
+        }
+        if (expected.getEditionYear() != null) {
+            assertThat(actual.getEditionYear(), is(expected.getEditionYear()));
+        }
+        if (expected.getEdition() != null) {
+            assertThat(actual.getEdition(), is(expected.getEdition()));
+        }
+        if (expected.getDescription() != null) {
+            assertThat(actual.getDescription(), is(expected.getDescription()));
+        }
     }
 
     private String generateUniqueIsbn() {
