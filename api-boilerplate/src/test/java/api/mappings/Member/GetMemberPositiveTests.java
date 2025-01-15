@@ -6,6 +6,7 @@ import retrofit2.Response;
 import java.util.List;
 
 import static api.retrofit.Members.*;
+import static api.validators.ResponseValidator.assertMember;
 import static api.validators.ResponseValidator.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -42,6 +43,8 @@ public class GetMemberPositiveTests {
         assertThat("Email is not the expected", member.getEmail(), is("maria@corp.com"));
         assertThat("Birth Date is not the expected", member.getBirthDate(), is(member.getBirthDate()));
         assertThat("Registration Date is not the expected", member.getRegistrationDate(), is(member.getRegistrationDate()));
+
+
     }
 
 
