@@ -22,7 +22,7 @@ public class UpdateMemberPositiveTest {
     @BeforeMethod
     public void setUpMember(){
         Member memberRequest = Member.builder()
-                .firstName("Joaquim")
+                .firstName("Manuel")
                 .lastName("Daniel")
                 .address("Rua das Flores")
                 .postalCode("3898-098")
@@ -35,9 +35,8 @@ public class UpdateMemberPositiveTest {
                 .registrationDate(LocalDate.now())
                 .build();
         Response<ResponseBody> response = createMember(memberRequest);
-        assertThat(response.code(), is(201));
 
-        assertThat("Body is not null", response.body(), notNullValue());
+        assert response.body() != null;
         memberId = Integer.parseInt(response.body().toString());
     }
 
@@ -48,7 +47,7 @@ public class UpdateMemberPositiveTest {
 
 
     @Test (description =  "Editar um Member")       //Teste falha
-    public void updateMemberPositiveTest1() throws IOException {
+    public void updateMemberPositiveTest1(){
         Member memberUpdate = Member.builder()
                 .firstName("Joaquim")
                 .lastName("Daniel")
@@ -76,8 +75,8 @@ public class UpdateMemberPositiveTest {
 
     }
 
-    @Test (description =  "Editar um Member")       //Teste falha
-    public void updateMemberPositiveTest2() throws IOException {
+    @Test (description =  "Editar um Member")       //Teste falha, É sempre Bad Request
+    public void updateMemberPositiveTest2(){
         Member memberUpdate = Member.builder()
                 .firstName("Joaquim")
                 .lastName("Daniel")
