@@ -24,7 +24,6 @@ public class GetAllReservationsNegativeTest {
             assertThat(response.code(), is(500));
             assertThat(response.message(), is("Internal Server Error"));
         } else {
-            // Se não conseguimos simular o erro, pelo menos verificamos que o endpoint está funcionar
             assertOk(response);
         }
     }
@@ -32,7 +31,6 @@ public class GetAllReservationsNegativeTest {
     @Test(description = "Get all reservations - unauthorized access")
     @SneakyThrows
     public void getAllReservationsUnauthorizedTest() {
-        // Este teste só faz sentido se a API requerer autenticação
 
         Response<List<Reservation>> response = getAllReservation();
 

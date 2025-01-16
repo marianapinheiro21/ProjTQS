@@ -41,6 +41,12 @@ public class ReturnBookNegativeTest {
         assertThat(response.code(), is(400));
         assertThat(response.message(), is("Bad Request"));
     }
+    @Test(description = "Return book with non-numeric ID")
+    @SneakyThrows
+    public void returnBookNonNumericIdTest() {
+        Response<ResponseBody> response = returnBookWithString("abc");
+        assertBadRequest(response);
+    }
 
     @Test(description = "Return already returned book")
     @SneakyThrows
@@ -91,3 +97,4 @@ public class ReturnBookNegativeTest {
         return (int)(System.currentTimeMillis() % 1000000);
     }
 }
+

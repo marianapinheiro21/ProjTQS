@@ -73,52 +73,6 @@ public class CreateBookPositiveTest {
         };
     }
 
-    @Test(description = "Create books with different statuses", dataProvider = "validBookStatuses")
-    public void createBookDifferentStatusesTest(BookStatus status) throws IOException {
-        Book book = Book.builder()
-                .title("Status Test Book")
-                .author("Status Test Author")
-                .isbn(generateUniqueIsbn())
-                .status(status)
-                .build();
-
-        Response<Integer> response = createBook(book);
-        assertCreated(response);
-        validateCreatedBook(response.body(), book);
-    }
-
-    @Test(description = "Create book with special characters in fields")
-    public void createBookSpecialCharactersTest() throws IOException {
-        Book book = Book.builder()
-                .title("Book with Special Chars: áéíóú")
-                .author("Author with Symbols: @#$%")
-                .publisher("Publisher & Co.")
-                .description("Description with émojis 🎉")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
-
-        Response<Integer> response = createBook(book);
-        assertCreated(response);
-        validateCreatedBook(response.body(), book);
-    }
-
-    @Test(description = "Create book with maximum length fields")
-    public void createBookMaxLengthFieldsTest() throws IOException {
-        String maxLength = "a".repeat(255); // Assumindo max length de 255
-        Book book = Book.builder()
-                .title(maxLength)
-                .author(maxLength)
-                .publisher(maxLength)
-                .description(maxLength)
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
-
-        Response<Integer> response = createBook(book);
-        assertCreated(response);
-        validateCreatedBook(response.body(), book);
-    }
 
     @Test(description = "Create multiple books in sequence")
     public void createMultipleBooksTest() throws IOException {

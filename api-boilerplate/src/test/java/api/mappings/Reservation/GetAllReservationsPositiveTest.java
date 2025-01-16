@@ -30,13 +30,12 @@ public class GetAllReservationsPositiveTest {
 
     @AfterMethod
     public void cleanup() throws IOException {
-        // Limpar todas as reservas criadas
         for (Integer reservationId : reservationIds) {
             Response<ResponseBody> returnResponse = returnBook(reservationId);
             assertOk(returnResponse);
         }
 
-        // Limpar todos os livros criados
+
         for (Integer bookId : bookIds) {
             Response<ResponseBody> deleteResponse = deleteBook(bookId);
             assertOk(deleteResponse);
@@ -55,7 +54,6 @@ public class GetAllReservationsPositiveTest {
 
     @Test(description = "Get all reservations - with multiple reservations")
     public void getAllReservationsMultipleTest() throws IOException {
-        // Criar algumas reservas para teste
         createTestReservations(3);
 
         Response<List<Reservation>> response = getAllReservation();

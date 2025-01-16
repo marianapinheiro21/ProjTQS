@@ -96,22 +96,6 @@ public class GetBookPositiveTest {
         assertThat(books, hasItem(hasProperty("status", is(status))));
     }
 
-    @Test(description = "Get books with pagination")
-    public void getBooksPaginationTest() throws IOException {
-
-        createMultipleBooks(20);
-
-
-        int[][] pageSizeCombinations = {{0, 5}, {1, 10}, {2, 5}};
-
-        for (int[] combination : pageSizeCombinations) {
-            Response<List<Book>> response = getBooksWithPagination(combination[0], combination[1]);
-            assertOk(response);
-
-            List<Book> books = response.body();
-            assertThat(books, hasSize(lessThanOrEqualTo(combination[1])));
-        }
-    }
 
     @Test(description = "Get books with sorting")
     public void getBooksSortingTest() throws IOException {

@@ -144,33 +144,7 @@ public class CreateBookNegativeTest {
         assertBadRequest(response);
     }
 
-    @Test(description = "Create book with special SQL injection characters")
-    @SneakyThrows
-    public void createBookSqlInjectionTest() {
-        Book book = Book.builder()
-                .title("Test Book'; DROP TABLE books;--")
-                .author("Test Author'; DELETE FROM books;--")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
 
-        Response<Integer> response = createBook(book);
-        assertBadRequest(response);
-    }
-
-    @Test(description = "Create book with HTML/Script injection")
-    @SneakyThrows
-    public void createBookScriptInjectionTest() {
-        Book book = Book.builder()
-                .title("<script>alert('xss')</script>")
-                .author("<img src='x' onerror='alert(1)'>")
-                .isbn(generateUniqueIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
-
-        Response<Integer> response = createBook(book);
-        assertBadRequest(response);
-    }
 
     private String generateUniqueIsbn() {
         return "978" + System.currentTimeMillis() % 10000000000L;

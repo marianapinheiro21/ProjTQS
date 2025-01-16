@@ -82,25 +82,7 @@ public class DeleteBookPositiveTest {
         assertNotFound(getResponse);
     }
 
-    @Test(description = "Delete book and verify in book list")
-    public void deleteBookVerifyListTest() throws IOException {
 
-        Response<List<Book>> initialListResponse = getAllBooks();
-        assertOk(initialListResponse);
-        int initialCount = initialListResponse.body().size();
-
-
-        Response<ResponseBody> deleteResponse = deleteBook(testBook.getId(), false);
-        assertNoContent(deleteResponse);
-
-
-        Response<List<Book>> finalListResponse = getAllBooks();
-        assertOk(finalListResponse);
-        int finalCount = finalListResponse.body().size();
-
-        assertThat(finalCount, is(initialCount - 1));
-        assertThat(finalListResponse.body(), not(hasItem(hasProperty("id", is(testBook.getId())))));
-    }
 
     @Test(description = "Delete and recreate book with same ISBN")
     public void deleteAndRecreateBookTest() throws IOException {

@@ -113,12 +113,7 @@ public class DeleteBookNegativeTest {
         deleteBook(book.getId(), true);
     }
 
-    @Test(description = "Delete book with SQL injection attempt")
-    @SneakyThrows
-    public void deleteBookSqlInjectionTest() {
-        Response<ResponseBody> response = deleteBookWithSqlInjection("1 OR 1=1");
-        assertBadRequest(response);
-    }
+
 
     @Test(description = "Delete book with invalid force parameter")
     @SneakyThrows

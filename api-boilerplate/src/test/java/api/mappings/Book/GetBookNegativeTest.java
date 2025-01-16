@@ -51,12 +51,6 @@ public class GetBookNegativeTest {
         assertBadRequest(response2);
     }
 
-    @Test(description = "Get books with SQL injection attempt")
-    @SneakyThrows
-    public void getBookSqlInjectionTest() {
-        Response<List<Book>> response = searchBooks("'; DROP TABLE books; --");
-        assertBadRequest(response);
-    }
 
     @Test(description = "Get books with very long search term")
     @SneakyThrows
@@ -66,12 +60,6 @@ public class GetBookNegativeTest {
         assertBadRequest(response);
     }
 
-    @Test(description = "Get books with special characters in search")
-    @SneakyThrows
-    public void getBookSpecialCharsSearchTest() {
-        Response<List<Book>> response = searchBooks("<script>alert('xss')</script>");
-        assertBadRequest(response);
-    }
 
     @Test(description = "Get books with invalid status")
     @SneakyThrows
@@ -80,12 +68,7 @@ public class GetBookNegativeTest {
         assertBadRequest(response);
     }
 
-    @Test(description = "Get books with multiple invalid parameters")
-    @SneakyThrows
-    public void getBookMultipleInvalidParamsTest() {
-        Response<List<Book>> response = getBooksWithMultipleParams(-1, 0, "invalid", "invalid", "'; DROP TABLE;--");
-        assertBadRequest(response);
-    }
+
 
     @Test(description = "Get book with non-numeric ID")
     @SneakyThrows

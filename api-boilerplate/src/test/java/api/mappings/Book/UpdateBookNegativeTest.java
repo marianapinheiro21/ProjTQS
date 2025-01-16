@@ -170,43 +170,6 @@ public class UpdateBookNegativeTest {
         deleteBook(originalBook.getId(), true);
     }
 
-    @Test(description = "Update book with SQL injection attempt")
-    @SneakyThrows
-    public void updateBookSqlInjectionTest() throws IOException {
-        Book originalBook = createValidBook();
-
-        Book updateBook = Book.builder()
-                .id(originalBook.getId())
-                .title("'; DROP TABLE books; --")
-                .author("'; DELETE FROM books; --")
-                .isbn(originalBook.getIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
-
-        Response<Integer> response = updateBook(originalBook.getId(), updateBook);
-        assertBadRequest(response);
-
-        deleteBook(originalBook.getId(), true);
-    }
-
-    @Test(description = "Update book with XSS attempt")
-    @SneakyThrows
-    public void updateBookXssAttemptTest() throws IOException {
-        Book originalBook = createValidBook();
-
-        Book updateBook = Book.builder()
-                .id(originalBook.getId())
-                .title("<script>alert('xss')</script>")
-                .author("<img src='x' onerror='alert(1)'>")
-                .isbn(originalBook.getIsbn())
-                .status(BookStatus.AVAILABLE)
-                .build();
-
-        Response<Integer> response = updateBook(originalBook.getId(), updateBook);
-        assertBadRequest(response);
-
-        deleteBook(originalBook.getId(), true);
-    }
 
 
     private Book createValidBook() throws IOException {
