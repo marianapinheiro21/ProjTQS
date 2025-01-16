@@ -23,8 +23,8 @@ public class DeleteMemberNegativeTest {
 
     @SneakyThrows
     @Test(description = "Delete Member with no Success")       //Na documentação está explicito que deveria retornar o erro 404, no entanto está a devolver que apagou com sucesso um membro que não existe
-    public void deleteMemberSuccess(){
-        Integer id=45;  //Estou a testar com o id 45 porque sei de antemão que há apenas 2 membros
+    public void deleteMemberNoSuccess(){
+        Integer id=0;  //Estou a testar com o id 45 porque sei de antemão que há apenas 2 membros
         Response<ResponseBody> response = deleteMember(id);
         assertNotFound(response);
 

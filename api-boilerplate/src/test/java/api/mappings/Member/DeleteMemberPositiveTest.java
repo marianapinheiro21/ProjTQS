@@ -47,7 +47,7 @@ public class DeleteMemberPositiveTest {
     public void deleteMemberSuccess() {
         Response<ResponseBody> response = deleteMember(this.memberId);
         assertNoContent(response);
-
+        assert (response.code() == 204);
         Response<Member> responseGet = getMemberByID(memberId);
         assertNotFound(responseGet);
     }

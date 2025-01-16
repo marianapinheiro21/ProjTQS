@@ -20,7 +20,7 @@ import static api.retrofit.Reservations.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class GetReservationByMemberIdPositiveTests {
+public class GetReservationByBookIDPositiveTestes {
 
     Integer memberId, bookId1, bookId2;
 
@@ -102,49 +102,41 @@ public class GetReservationByMemberIdPositiveTests {
     }
 
     @Test
-    public void getAllReservationsByMemberId() {
-        Response<List<Reservation>> reservationResponse =getAllReservationByMemberId(memberId);
+    public void getAllReservationsByBookID() {
+        Response<List<Reservation>> reservationResponse =getAllReservationByBookId(bookId1);
         assert (reservationResponse.code()==200);
         assertThat("Body is not null", reservationResponse.body(), notNullValue());
         assertThat("Reservation list should not be empty", reservationResponse.body(), not(empty()));
 
-        for (Reservation reservation : reservationResponse.body()) {
-            assertThat("Reservation ID should not be null", reservation.getId(), notNullValue());
-            assertThat("Member ID should match", reservation.getMemberId(), is(memberId));
-            assertThat("Book ID should not be null", reservation.getBookId(), notNullValue());
-            assertThat("Reservation date should not be null", reservation.getReservationDate(), notNullValue());
-            assertThat("Return date should be set correctly", reservation.getReturnDate(), anyOf(is(notNullValue()), is(nullValue())));
-        }
     }
 
     @Test
-    public void getAllActiveReservationsByMemberId() {
-        Response<List<Reservation>> reservationResponse =getAllReservationByMemberIdActive(memberId);
-        assert (reservationResponse.code()==200);
-        assertThat("Body is not null", reservationResponse.body(), notNullValue());
-        System.out.println("########################################################");
-        System.out.println(reservationResponse.body());
-
-        assertThat("Reservation list should not be empty", reservationResponse.body(), not(empty()));
-        for (Reservation reservation : reservationResponse.body()) {
-            assertThat("Reservation ID should not be null", reservation.getId(), notNullValue());
-            assertThat("Member ID should match", reservation.getMemberId(), is(memberId));
-            assertThat("Book ID should not be null", reservation.getBookId(), notNullValue());
-            assertThat("Reservation date should not be null", reservation.getReservationDate(), notNullValue());
-            assertThat("Return date should be set correctly", reservation.getReturnDate(), anyOf(is(notNullValue()), is(nullValue())));
-        }
-
-    }
-
-    @Test
-    public void getAllNonActiveReservationsByMemberId() {
-        Response<List<Reservation>> reservationResponse =getAllReservationByMemberIdNotActive(memberId);
+    public void getAllActiveReservationsByBookID() {
+        Response<List<Reservation>> reservationResponse =getAllReservationByBookIdActive(bookId1);
         assert (reservationResponse.code()==200);
         assertThat("Body is not null", reservationResponse.body(), notNullValue());
         System.out.println("########################################################");
         System.out.println(reservationResponse.body());
 
         assertThat("Reservation list should be empty", reservationResponse.body(), empty());
+
+    }
+
+    @Test
+    public void getAllNonActiveReservationsByBookID() {
+        Response<List<Reservation>> reservationResponse =getAllReservationByBookIdNotActive(bookId1);
+        assert (reservationResponse.code()==200);
+        assertThat("Body is not null", reservationResponse.body(), notNullValue());
+        System.out.println("########################################################");
+        System.out.println(reservationResponse.body());
+
+        for (Reservation reservation : reservationResponse.body()) {
+            assertThat("Reservation ID should not be null", reservation.getId(), notNullValue());
+            assertThat("Book ID should match", reservation.getBookId(), is(bookId1));
+            assertThat("Book ID should not be null", reservation.getBookId(), notNullValue());
+            assertThat("Reservation date should not be null", reservation.getReservationDate(), notNullValue());
+            assertThat("Return date should be set correctly", reservation.getReturnDate(), anyOf(is(notNullValue()), is(nullValue())));
+        }
 
 
     }
