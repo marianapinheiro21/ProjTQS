@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class api.mappings.Reservation.CreateReservationPositiveTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class api.mappings.Reservation.CreateReservationPositiveTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/api.mappings.Reservation.html">api.mappings.Reservation</a> &gt; CreateReservationPositiveTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">1</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.157s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="setUpBook"></a>
+<h3 class="failures">setUpBook</h3>
+<span class="code">
+<pre>java.lang.AssertionError: 
+Expected: is &lt;201&gt;
+     but: was &lt;400&gt;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at api.mappings.Reservation.CreateReservationPositiveTest.setUpBook(CreateReservationPositiveTest.java:64)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.internal.TestInvoker.runConfigMethods(TestInvoker.java:700)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:527)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:794)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:153)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:95)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="skipped">createReservationSuccess</td>
+<td class="skipped">-</td>
+<td class="skipped">ignored</td>
+</tr>
+<tr>
+<td class="failures">setUpBook</td>
+<td class="failures">0.157s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: --&gt; POST http://localhost:8080/book
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json; charset=UTF-8
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Content-Length: 1182
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: {&quot;id&quot;:null,&quot;title&quot;:&quot;Wicked&quot;,&quot;author&quot;:&quot;Gregory Maguire&quot;,&quot;publisher&quot;:&quot;william morrow company&quot;,&quot;editionYear&quot;:2000,&quot;edition&quot;:&quot;Third Edition&quot;,&quot;description&quot;:&quot;Years before Dorothy and her dog crash-land, another little girl makes her presence known in Oz. This girl, Elphaba, is born with emerald-green skin—no easy burden in a land as mean and poor as Oz, where superstition and magic are not strong enough to explain or overcome the natural disasters of flood and famine. Still, Elphaba is smart, and by the time she enters Shiz University, she becomes a member of a charmed circle of Oz’s most promising young citizens. \n  But Elphaba’s Oz is no utopia. The Wizard’s secret police are everywhere. Animals—those creatures with voices, souls, and minds—are threatened with exile. Young Elphaba, green and wild and misunderstood, is determined to protect the Animals—even if it means combating the mysterious Wizard, even if it means risking her single chance at romance. Ever wiser in guilt and sorrow, she can find herself grateful when the world declares her a witch. And she can even make herself glad for that young girl from Kansas.&quot;,&quot;isbn&quot;:&quot;0060987103&quot;,&quot;status&quot;:null}
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: --&gt; END POST (1182-byte body)
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: &lt;-- 400 http://localhost:8080/book (41ms)
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Content-Type: application/json
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Transfer-Encoding: chunked
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Date: Wed, 15 Jan 2025 13:11:22 GMT
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: Connection: close
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: 
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: {&quot;timestamp&quot;:&quot;2025-01-15T13:11:22.116+00:00&quot;,&quot;status&quot;:400,&quot;error&quot;:&quot;Bad Request&quot;,&quot;message&quot;:&quot;Description too long&quot;,&quot;path&quot;:&quot;/book&quot;}
+Jan 15, 2025 1:11:22 PM okhttp3.internal.platform.Platform log
+INFO: &lt;-- END HTTP (128-byte body)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at Jan 15, 2025, 1:11:24 PM</p>
+</div>
+</div>
+</body>
+</html>

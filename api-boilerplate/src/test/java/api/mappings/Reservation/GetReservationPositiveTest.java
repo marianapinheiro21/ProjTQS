@@ -12,9 +12,20 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import retrofit2.Response;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static api.retrofit.Books.*;
 import static api.retrofit.Members.createMember;
@@ -23,12 +34,12 @@ import static api.retrofit.Reservations.*;
 import static api.validators.ResponseValidator.assertOk;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public class GetReservationPositiveTest {
 
-    /*Integer memberId, bookId, reservationId;
+    Integer memberId, bookId, reservationId;
     Reservation reservationRequest;
     @SneakyThrows
     @BeforeMethod
@@ -79,7 +90,7 @@ public class GetReservationPositiveTest {
         Response<ResponseBody> reservationRequest =  createReservation(memberId, bookId);
         assert reservationRequest.body() != null;
 
-        reservationId = Integer.parseInt(reservationRequest.body().toString());
+        reservationId = Integer.parseInt(reservationRequest.body().string());
     }
 
 
@@ -117,7 +128,7 @@ public class GetReservationPositiveTest {
         assertThat("Reservation's Date is not the expected", reservationResponse.getReservationDate(), is(reservationRequest2.getReservationDate()));
         assertThat("Reservation's Return Date is not the expected", reservationResponse.getReturnDate(), is(reservationRequest2.getReturnDate()));
 
-    }*/
+    }
 
     @Test(description ="Get reservation by ID")
     public void getReservationById2( ) {
@@ -132,6 +143,18 @@ public class GetReservationPositiveTest {
         assertThat("Reservation's Book ID is not the expected", reservationResponse.getBookId(), is(2));
         //assertThat("Reservation's Date is not the expected", reservationResponse.getReservationDate(), is(<2025-01-15T14:37:35.005009>));
         //assertThat("Reservation's Return Date is not the expected", reservationResponse.getReturnDate(), is(null));
+
+    }
+
+    @Test(description = "Get all reservations")
+    public void getAllReservations( ) {
+        Response<List<Reservation>> response = getAllReservation();
+        assertOk(response);
+
+        assertThat("Body is not null", response.body(), notNullValue());
+
+        List<Reservation> reservationsList = response.body();
+        assertThat("Lists should have more than one element", reservationsList, hasSize(greaterThanOrEqualTo(1)));
 
     }
 }

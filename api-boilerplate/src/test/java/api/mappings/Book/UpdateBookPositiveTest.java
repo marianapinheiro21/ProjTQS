@@ -1,5 +1,6 @@
 package api.mappings.Book;
 
+<<<<<<< HEAD
 import api.mappings.generic.Book;
 import api.mappings.generic.Book.BookStatus;
 import okhttp3.ResponseBody;
@@ -228,3 +229,7 @@ public class UpdateBookPositiveTest {
         return "978" + System.currentTimeMillis() % 10000000000L;
     }
 }
+=======
+public class UpdateBookPositiveTest {
+}
+>>>>>>> a6937f70dacf73c82f07b1adafa0bbc624692761
