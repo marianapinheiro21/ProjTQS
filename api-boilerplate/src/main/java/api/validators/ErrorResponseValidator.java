@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.notNullValue;
 public class ErrorResponseValidator {
 
     public static void assertErrorResponse(ErrorResponse errorResponse, Integer statusCode, String error, String message, String path) {
-        //TODO: update this with the parameters you want to validate on error responses
         assertThat("Timestamp should not be null", errorResponse.getTimestamp(), notNullValue());
         assertThat("status is not the expected", errorResponse.getStatus(), is(statusCode));
         assertThat("Error is not the expected", errorResponse.getError(), is(error));

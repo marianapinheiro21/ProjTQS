@@ -1,6 +1,7 @@
 package api.mappings.Member;
 
 import api.mappings.generic.Member;
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,6 +21,8 @@ import static org.hamcrest.Matchers.notNullValue;
 public class UpdateMemberPositiveTest {
 
     Integer memberId;
+
+    @SneakyThrows
     @BeforeMethod
     public void setUpMember(){
         Member memberRequest = Member.builder()
@@ -38,7 +41,7 @@ public class UpdateMemberPositiveTest {
         Response<ResponseBody> response = createMember(memberRequest);
 
         assert response.body() != null;
-        memberId = Integer.parseInt(response.body().toString());
+        memberId = Integer.parseInt(response.body().string());
     }
 
     @AfterMethod
@@ -47,11 +50,12 @@ public class UpdateMemberPositiveTest {
     }
 
 
+    @SneakyThrows
     @Test (description =  "Editar um Member")       //Teste falha
     public void updateMemberPositiveTest1(){
         Member memberUpdate = Member.builder()
                 .firstName("Joaquim")
-                .lastName("Daniel")
+                .lastName("Naniel")
                 .build();
 
         Response<Member> response = updateMember(memberId, memberUpdate);

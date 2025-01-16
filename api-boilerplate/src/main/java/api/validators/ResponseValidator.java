@@ -1,5 +1,6 @@
 package api.validators;
 
+import api.mappings.generic.Book;
 import api.mappings.generic.Member;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,18 @@ public class ResponseValidator {
         assertThat("Email is not the expected", memberResponse.getEmail(), is(memberRequest.getEmail()));
         assertThat("Birth Date is not the expected", memberResponse.getBirthDate(), is(memberRequest.getBirthDate()));
         assertThat("Registration Date is not the expected", memberResponse.getRegistrationDate(), is(memberRequest.getRegistrationDate()));
+    }
+
+    public static void assertBook(Response response, Book bookResponse, Book bookRequest) {
+
+        assertThat("Title is not the expected", bookResponse.getTitle(), is(bookRequest.getTitle()));
+        assertThat("Author is not the expected", bookResponse.getAuthor(), is(bookRequest.getAuthor()));
+        assertThat("Publisher is not the expected", bookResponse.getPublisher(), is(bookRequest.getPublisher()));
+        assertThat("Edition year is not the expected", bookResponse.getEditionYear(), is(bookRequest.getEditionYear()));
+        assertThat("Edition is not the expected", bookResponse.getEdition(), is(bookRequest.getEdition()));
+        assertThat("Description is not the expected", bookResponse.getDescription(), is(bookRequest.getDescription()));
+        assertThat("ISBN is not the expected", bookResponse.getIsbn(), is(bookRequest.getIsbn()));
+        assertThat("Status is not the expected", bookResponse.getStatus(), is(bookRequest.getStatus()));
     }
 
 
